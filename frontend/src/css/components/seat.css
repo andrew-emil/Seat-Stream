@@ -1,0 +1,86 @@
+tr:hover {
+	background-color: #ddd;
+	opacity: 0.6;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+.seating-chart {
+	border-collapse: collapse;
+	margin: 20px auto;
+	transition: background-color 0.3s ease;
+	width: 100%;
+	max-width: 100%;
+}
+
+.seating-chart td {
+	width: 20px;
+	height: 20px;
+	border: 3px solid var(--main-color);
+}
+
+td.available {
+	background-color: var(--available-seat);
+	cursor: pointer;
+}
+
+td.unavailable {
+	background-color: var(--unavailable-seat);
+	position: relative;
+}
+
+td.unavailable::before,
+td.unavailable::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 21px;
+	height: 2px;
+	background-color: black;
+}
+
+td.unavailable::before {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+td.unavailable::after {
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.selected-seat {
+	background-color: var(--your-seat);
+	cursor: pointer;
+}
+
+@media (max-width: 768px) {
+	.seating-chart {
+		margin: 10px auto;
+	}
+
+	.seating-chart td {
+		width: 16px;
+		height: 16px;
+		border: 2px solid var(--main-color);
+	}
+
+	td.unavailable::before,
+	td.unavailable::after {
+		width: 17px;
+	}
+}
+
+@media (max-width: 480px) {
+	.seating-chart td {
+		width: 14px;
+		height: 14px;
+		border: 1px solid var(--main-color);
+	}
+
+	td.unavailable::before,
+	td.unavailable::after {
+		width: 15px;
+	}
+}

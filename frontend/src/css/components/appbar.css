@@ -1,0 +1,177 @@
+nav {
+	background-color: #2a2a2a;
+	height: 100px;
+}
+
+.container-fluid {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.responsive-appbar-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 5px;
+	gap: 6px;
+}
+
+nav .logo {
+	position: absolute;
+	left: 10px;
+	top: 5px;
+}
+
+nav .logo img {
+	width: 170px;
+	height: 90px;
+}
+
+nav a,
+.nav-item.movie {
+	text-decoration: none;
+	color: var(--text-color);
+	cursor: pointer;
+    height: auto;
+}
+
+nav .container-fluid .links {
+	display: flex;
+	align-items: center;
+	padding-top: 40px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.nav-item.movie{
+    width: 90px;
+}
+
+.nav-item.movie .movies-options {
+	width: 180px;
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	position: relative;
+	top: 10px;
+	background-color: var(--link-hover);
+	padding: 10px;
+	border-radius: 5px;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 16px;
+	z-index: 1000;
+}
+
+.nav-item.movie:hover{
+    cursor: default;
+}
+
+.nav-item.movie .movies-options::before {
+	content: "";
+	position: absolute;
+	top: -10px;
+	left: 8px;
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid var(--link-hover);
+}
+
+.nav-item.movie .movies-options hr {
+	height: 1px;
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-item.movie .movies-options a:hover{
+    color: black;
+}
+
+.links ul {
+	list-style: none;
+	display: flex;
+	gap: 10px;
+	margin-right: 130px;
+}
+
+.links li {
+	margin-left: 20px;
+}
+
+.nav-link:hover,
+.form-control .searchbar button:hover,
+.nav-item.movie:hover {
+	color: var(--link-hover);
+}
+
+.form-control {
+	width: 300px;
+	border-radius: 10px;
+	padding: 5px;
+	border: none;
+	position: absolute;
+	right: 10px;
+    top: 27px;
+}
+
+.form-control .searchbar {
+	display: flex;
+	border: none;
+	border-radius: 5px;
+	overflow: hidden;
+	padding: 5px;
+}
+
+.form-control .searchbar input {
+	border: none;
+	outline: none;
+	width: 100%;
+	font-size: 16px;
+	padding: 7px;
+	border-radius: 10px;
+}
+
+.form-control .searchbar button {
+	width: 25px;
+	height: 25px;
+	color: var(--main-color);
+	border: none;
+	outline: none;
+	background-color: transparent;
+	cursor: pointer;
+	position: relative;
+	left: -27px;
+	top: 5px;
+}
+
+@media (max-width: 768px) {
+	.logo img {
+		width: 80px;
+	}
+
+	.links ul {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.links li {
+		margin-left: 0;
+		margin-bottom: 10px;
+	}
+
+	.form-control {
+		width: 150px;
+	}
+
+	.btn-outline-success {
+		padding: 5px 10px;
+	}
+}

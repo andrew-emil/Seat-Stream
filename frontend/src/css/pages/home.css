@@ -1,0 +1,348 @@
+.home-page-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 1500px;
+	min-height: 300vh;
+	height: 500vh;
+}
+
+.first-section {
+	position: absolute;
+	top: 85px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 100vw;
+	height: 400px;
+}
+
+/* Swiper settings */
+
+.swiper {
+	max-width: 100vw; /* Restricts the width to 90% of the viewport */
+	width: 100%;
+	height: 100%;
+	position: relative;
+	top: 25px;
+	overflow: hidden;
+}
+
+.swiper-wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+}
+
+.swiper-slide {
+	width: 100%; /* Adjust this to control image width */
+	height: 90%; /* Control the height of the image */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+/* Image styling for responsiveness */
+img {
+	display: block;
+	width: 100%;
+	height: 360px;
+	object-fit: fill;
+}
+
+.swiper-pagination-bullet-active {
+	width: 15px;
+	border-radius: 10px;
+	transition: width 0.3s ease;
+}
+
+/* Pagination bullets */
+.swiper {
+	--swiper-pagination-color: rgba(56, 245, 255, 1);
+	--swiper-pagination-bullet-inactive-color: white;
+}
+
+/* Navigation buttons styling */
+.button-next,
+.button-prev {
+	position: absolute;
+	top: 50%;
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	border-radius: 50%;
+	background-color: rgba(56, 245, 255, 0.2);
+	transform: translateY(-50%);
+	cursor: pointer;
+	z-index: 10;
+}
+
+:is(.button-next, .button-prev):hover {
+	background-color: rgba(56, 245, 255, 0.3);
+}
+
+/* Next button positioning */
+.button-next {
+	right: 10px;
+}
+
+/* Previous button positioning */
+.button-prev {
+	left: 10px;
+}
+
+.right-btn,
+.left-btn {
+	width: 35px;
+	height: 35px;
+}
+
+/*second section*/
+.second-section {
+	position: absolute;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	height: 900px;
+	padding: 20px;
+}
+
+.second-section {
+	top: 70%;
+}
+
+.section-title span {
+	position: relative;
+	left: 10px;
+	color: var(--text-color);
+	margin: 20px;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.section-title span::before {
+	content: "";
+	display: flex;
+	width: 70px;
+	height: 10px;
+	background-color: var(--button-color);
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+
+.grid-container{
+	width: 100%;
+}
+
+.movie-grid {
+	width: auto;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+.movie-grid .movie-poster {
+	position: relative;
+	overflow: hidden;
+	height: 450px;
+	margin: 0;
+}
+
+
+.movie-poster img {
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
+.movie-details {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.9);
+	padding: 20px;
+	transition: opacity 0.3s ease-in-out;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.movie-details h3 {
+	margin-bottom: 10px;
+}
+
+.movie-details p {
+	display: flex;
+	color: var(--text-color);
+	font-size: 14px;
+	width: 100%;
+	height: 100%;
+	line-height: 22px;
+}
+
+.button-container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.more-info-btn,
+.book-now-btn,
+.movie-card-section .movie-details button {
+	color: var(--text-color);
+	outline: none;
+	padding: 10px 20px;
+	margin: 10px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.more-info-btn,
+.movie-card-section .movie-details button{
+	border: 2px solid var(--button-hover);
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.book-now-btn {
+	background-color: var(--button-color);
+	border: none;
+}
+
+.more-info-btn:hover,
+.book-now-btn:hover,
+.movie-card-section .movie-details button:hover {
+	background-color: var(--button-hover);
+}
+
+.second-section .view-all-movies-btn {
+	display: block;
+	border: none;
+	outline: none;
+	padding: 15px;
+	border-radius: 8px;
+	background-color: var(--button-color);
+	color: var(--text-color);
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 20px;
+	transition: 0.3s ease-in-out;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.second-section .view-all-movies-btn:hover {
+	background-color: var(--button-hover);
+}
+
+.upcoming-movies,
+.coming-soon-movies{
+	width: 100%;
+}
+
+.upcoming-movies .section-title{
+	margin-bottom: 10px;
+}
+
+.movie-card-section {
+	background-color: transparent;
+	width: 100%;
+	height: 400px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 10px;
+	position: relative;
+	float: right;
+}
+
+.movie-card-section .movie-image {
+	display: flex;
+	width: auto;
+	height: auto;
+	object-fit: cover;
+	border-radius: 5px 5px 0 0;
+}
+
+.movie-card-section .movie-details {
+	width: calc(100% - 220px);
+	display: flex;
+	align-items: flex-start;
+	background-color: transparent;
+	position: relative;
+	margin: -14px;
+	right: 20px;
+}
+
+.movie-card-section .movie-details button{
+	background-color: transparent;
+}
+
+.coming-soon-movies hr.dashed,
+.second-section hr.dashed{
+	background-color: transparent;
+	width: 92%;
+	display: block;
+	margin: 20px;
+	border: 2px dashed var(--text-color);
+	border-spacing: 30px;
+}
+
+@media screen and (max-width: 1150px) {
+	.movie-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.home-page-container{
+		height: 550vh;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.home-page-container{
+		height: 600vh;
+	}
+
+	.movie-grid {
+		position: relative;
+		padding: 0 20%;
+		grid-template-columns: 1fr;
+		height: 100%;
+	}
+
+	.movie-grid .movie-poster {
+		display: block;
+	}
+
+	.upcoming-movies{
+		position: relative;
+		top: 100px;
+	}
+}
+
+@media screen and (max-width: 490px){
+	.home-page-container{
+		height: 700vh;
+	}
+
+	.movie-card-section{
+		display: flex;
+		flex-direction: column;
+		height: auto;
+	}
+
+	.movie-card-section .movie-details{
+		width: 100%;
+	}
+}
