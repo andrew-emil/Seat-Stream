@@ -49,6 +49,10 @@ hr {
 	flex: 1;
 }
 
+.fix-height{
+	height: 90vh;
+}
+
 footer {
 	padding: 10px;
 	width: 100%;
