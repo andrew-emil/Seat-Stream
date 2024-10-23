@@ -3,12 +3,14 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Movie } from "@/utils/types";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import Image  from 'next/image';
 
 import "@/app/home.css"
 import "swiper/css/pagination";
 
 const Carousel = (movie: Movie[]) => {
     const router = useRouter();
+
 	return (
 		<Swiper
 			modules={[Navigation, Pagination, Autoplay]}
@@ -41,7 +43,7 @@ const Carousel = (movie: Movie[]) => {
 						// 	},
 						// });
 					}}>
-					<img src={slide.poster} alt={slide.title} />
+					<Image src={slide.poster} alt={slide.title} height={360} width={300} />
 				</SwiperSlide>
 			))}
 			<div className="button-prev">

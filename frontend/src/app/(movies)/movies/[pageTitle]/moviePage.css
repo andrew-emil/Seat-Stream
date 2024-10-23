@@ -1,0 +1,48 @@
+.movies-container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	height: auto;
+	min-height: 100vh;
+	width: 100%;
+}
+
+.page-title {
+	position: relative;
+	left: 10px;
+	color: var(--text-color);
+	margin: 20px;
+	font-size: 26px;
+	font-weight: bold;
+    text-transform: capitalize;
+}
+
+.page-title::before{
+    content: "";
+	display: flex;
+	width: 70px;
+	height: 10px;
+	background-color: var(--button-color);
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+
+.movies-column{
+    width: 95%;
+    padding: 5px;
+}
+
+.movies-column hr.dashed{
+    background-color: transparent;
+	width: 95%;
+	display: block;
+	margin: 20px;
+	border: 2px dashed var(--text-color);
+	border-spacing: 30px;
+}
+
+.movies-column  .movie-card-section .movie-image{
+    width: 350px;
+    height: 350px;
+    margin-right: 8px;
+}

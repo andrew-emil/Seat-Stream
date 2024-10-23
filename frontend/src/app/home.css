@@ -234,6 +234,8 @@ img {
 	color: var(--text-color);
 	position: relative;
 	left: 50%;
+	width: 200px;
+	text-align: center;
 	transform: translateX(-50%);
 	margin-top: 20px;
 	transition: 0.3s ease-in-out;
@@ -286,7 +288,7 @@ img {
 	right: 20px;
 }
 
-.movie-card-section .movie-details button{
+.movie-card-section .movie-details .info-btn{
 	background-color: transparent;
 }
 
