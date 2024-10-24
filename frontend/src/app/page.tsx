@@ -9,7 +9,7 @@ import "./home.css";
 const movies: Movie[] = [];
 
 const HomePage = () => {
-	//TODO: call api function
+	// TODO: call api function
 	return (
 		<main className="home-page-container">
 			<>
@@ -27,7 +27,7 @@ const HomePage = () => {
 								<div></div>
 							))}
 						</div>
-						//TODO: add the correct href
+						{/*TODO: add the correct href*/}
 						<Link className="view-all-movies-btn" href="/">
 							View all movies
 						</Link>

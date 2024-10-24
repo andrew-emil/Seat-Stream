@@ -63,7 +63,7 @@ const Header = () => {
 									</li>
 									<hr className="w-full" />
 									<li>
-										<Link href="movies/coming soon">Coming soon</Link>
+										<Link href="/movies/coming soon">Coming soon</Link>
 									</li>
 								</ul>
 							</li>
