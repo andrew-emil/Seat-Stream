@@ -59,11 +59,11 @@ const Header = () => {
 									className="movies-options"
 									style={{ opacity: isMenuOpen ? 1 : 0 }}>
 									<li>
-										<Link href="/movies/what's on">What's on</Link>
+										<Link href="/movies/what's-on">What's on</Link>
 									</li>
 									<hr className="w-full" />
 									<li>
-										<Link href="/movies/coming soon">Coming soon</Link>
+										<Link href="/movies/coming-soon">Coming soon</Link>
 									</li>
 								</ul>
 							</li>

@@ -8,13 +8,12 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import Head from "next/head";
 
-
-
 export const metadata: Metadata = {
 	title: "Seat Stream",
 	description: "Cinema reservation website",
-	
 };
+
+
 
 export default function RootLayout({
 	children,
@@ -26,7 +25,7 @@ export default function RootLayout({
 			<Head>
 				<link rel="icon" href="../../public/favicon.ico" />
 			</Head>
-			<body className="page-container">
+			<body className="page-container overflow-x-hidden">
 				<Header />
 				<ToastContainer
 					position="top-center"

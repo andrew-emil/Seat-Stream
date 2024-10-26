@@ -1,0 +1,21 @@
+.add-movie-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 1500px;
+	height: 90vh;
+	background-color: var(--main-color);
+	padding: 30px;
+	background-image: url("../../../../public/background-logo.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.add-movie-form{
+    display: flex;
+	flex-direction: column;
+	width: 450px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
