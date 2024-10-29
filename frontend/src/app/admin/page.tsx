@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const AdminDashboard = () => {
 	return (
 		<div className="min-h-screen text-[#f5f5f5] p-5">

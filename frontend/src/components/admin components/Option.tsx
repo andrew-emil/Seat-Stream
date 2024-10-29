@@ -11,74 +11,66 @@ interface OptionComponentProps {
 	LinksText: string[];
 }
 
-const Option = (props: OptionComponentProps) => {
+const Option = ({ state, setState, btnText, LinksText, url }: OptionComponentProps) => {
 	const menuVariant = {
 		open: { rotate: 180 },
-		close: { rotate: 0 },
+		closed: { rotate: 0 },
 	};
 
 	const wrapperVariant = {
 		open: {
 			scaleY: 1,
+			opacity: 1,
 			transition: {
+				duration: 0.3,
 				when: "beforeChildren",
-				staggerChildren: 0.2,
+				staggerChildren: 0.1,
 			},
 		},
 		closed: {
 			scaleY: 0,
+			opacity: 0,
 			transition: {
+				duration: 0.3,
 				when: "afterChildren",
-				staggerChildren: 0.2,
+				staggerChildren: 0.1,
 			},
 		},
 	};
 
 	const itemVariant = {
-		open: {
-			opacity: 1,
-			y: 0,
-			transition: {
-				when: "beforeChildren",
-			},
-		},
-		closed: {
-			opacity: 0,
-			y: -15,
-			transition: {
-				when: "afterChildren",
-			},
-		},
+		open: { opacity: 1, y: 0 },
+		closed: { opacity: 0, y: -10 },
 	};
 
 	return (
 		<motion.div
-			animate={props.state ? "open" : "close"}
-			className="mt-5 flex items-center justify-center flex-col lg:items-start relative">
+			animate={state ? "open" : "closed"}
+			className="relative">
 			<button
-				onClick={() => props.setState((prev) => !prev)}
-				className="flex items-center mb-5 text-xl text-[#f5f5f5] hover:text-[#2196f3] transition">
-				<span>{props.btnText}</span>
-				<motion.span className="ml-5" variants={menuVariant}>
-					<IoIosArrowDown />
+				onClick={() => setState((prev) => !prev)}
+				aria-expanded={state}
+				className="flex items-center text-lg lg:text-xl text-[#f5f5f5] hover:text-[#e91e63] transition mb-3 lg:mb-0">
+				<span>{btnText}</span>
+				<motion.span variants={menuVariant} className="ml-2">
+					<IoIosArrowDown size={18} />
 				</motion.span>
 			</button>
-			{props.state && (
-				<motion.ul
-					initial={wrapperVariant.closed}
-					variants={wrapperVariant}
-					animate={{ scaleY: 1 }}
-					transition={{ duration: 0.5 }}
-					className="flex flex-col h-auto overflow-hidden gap-3 w-full">
-					{props.LinksText.map((linkName, index) => (
-						<motion.li
-							variants={itemVariant}
-							className=" text-[#f5f5f5] hover:text-[#2196f3] transition w-full cursor-pointer relative left-[30px]">
-							<Link href={props.url[index]}>{linkName}</Link>
-						</motion.li>
-					))}
-				</motion.ul>
-			)}
+			<motion.ul
+				initial="closed"
+				animate={state ? "open" : "closed"}
+				variants={wrapperVariant}
+				className="absolute bg-[#3e3a3a] mt-2 p-3 rounded-lg shadow-lg flex flex-col gap-2 overflow-hidden w-40 border border-[#8b858d] z-10">
+				{LinksText.map((linkName, index) => (
+					<motion.li
+						key={index}
+						variants={itemVariant}
+						onClick={() => setState((prev) => !prev)}
+						className="text-[#f5f5f5] hover:text-[#e91e63] transition cursor-pointer">
+						<Link href={url[index]}>{linkName}</Link>
+					</motion.li>
+				))}
+			</motion.ul>
 		</motion.div>
 	);
 };

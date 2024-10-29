@@ -57,7 +57,7 @@ const Header = () => {
 								</div>
 								<ul
 									className="movies-options"
-									style={{ opacity: isMenuOpen ? 1 : 0 }}>
+									style={{ display: isMenuOpen ? "flex" : "none" }}>
 									<li>
 										<Link href="/movies/what's-on">What's on</Link>
 									</li>

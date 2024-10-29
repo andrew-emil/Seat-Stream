@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AdminSideBar from "./AdminSideBar";
+import AdminSideBar from "@/components/admin components/AdminSideBar";
 
 import "@/app/globals.css";
 
@@ -14,9 +14,9 @@ interface AdminDashboardProps {
 
 export default function adminLayout({ children }: AdminDashboardProps) {
 	return (
-		<div className="flex items-start justify-between overflow-hidden">
+		<div className="overflow-x-hidden">
 			<AdminSideBar />
-			<div className="w-full lg:w-4/5">{children}</div>
+			<div className="w-full block">{children}</div>
 		</div>
 	);
 }

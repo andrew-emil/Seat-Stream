@@ -37,7 +37,8 @@ label {
 	margin-bottom: 5px;
 }
 
-.form-group input {
+.form-group input:not([type="checkbox"]),
+.form-group textarea {
 	width: 100%;
 	padding: 10px;
 	background-color: var(--input-bg-color);
@@ -46,7 +47,8 @@ label {
 	color: var(--text-color);
 }
 
-.form-group input::placeholder {
+.form-group input::placeholder,
+.form-group textarea::placeholder {
 	color: #bbb;
 }
 
@@ -89,7 +91,7 @@ label {
     background-color: transparent;
     cursor: pointer;;
 	align-self: flex-end;
-	bottom: 41px;
+	bottom: 44px;
 	right: 10px;
 	transition: opacity 0.3s ease;
 }
