@@ -10,13 +10,13 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import "@/app/(user)/login/login.css";
 
 const LoginForm = () => {
+	
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors },
 	} = useForm();
-
 	const [errorMessage, setErrorMessage] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -34,40 +34,39 @@ const LoginForm = () => {
 	const onSubmit = (data: FieldValues) => console.log(data);
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="login-form">
+		<form onSubmit={handleSubmit(onSubmit)} className="form-fields">
 			<div className="form-group">
-				<label htmlFor="usernameOrEmail">Username or Email:</label>
+				<label>Username or Email</label>
 				<input
 					type="text"
 					{...register("usernameOrEmail", { required: true })}
-					className="inputfield"
 					placeholder="Enter your username or email"
 				/>
 				{errors.usernameOrEmail && (
 					<span className="err-msg">please enter your username or email</span>
 				)}
+				<br />
 				<label>
-					Password:
+					Password
+				</label>
 					<input
 						type={showPassword ? "text" : "password"}
-						className="inputfield"
 						placeholder="Enter your password"
 						{...register("password", { required: true })}
 					/>
-				</label>
 				<button
 					type="button"
 					className="pass-toggle-visibility"
 					disabled={watch('password') === ''}
 					onClick={togglePasswordVisibility}>
-					{showPassword ? <FiEyeOff size={30}/> : <FiEye size={30} />}
+					{showPassword ? <FiEyeOff size={24}/> : <FiEye size={24} />}
 				</button>
 				{errors.password && (
 					<span className="err-msg">please enter your password</span>
 				)}
 
 				{errorMessage !== "" && (
-					<span className="err-msg-server">{errorMessage}</span>
+					<span className="err-msg">{errorMessage}</span>
 				)}
 				<button type="submit" className="submit-button" disabled={isLoading}>
 					{isLoading ? <ButtonSpinner /> : "Login"}

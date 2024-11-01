@@ -13,10 +13,9 @@ nav {
 .responsive-appbar-container {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	padding: 5px;
-	gap: 6px;
+	align-items: flex-end;
+	justify-content: center;
+	width: 100%;
 }
 
 .logo {
@@ -59,7 +58,7 @@ nav .container-fluid .links {
 }
 
 .nav-item.movie .movies-options {
-	width: 180px;
+	width: 150px;
 	height: 100px;
 	display: flex;
 	flex-direction: column;

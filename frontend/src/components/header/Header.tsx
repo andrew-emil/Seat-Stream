@@ -4,6 +4,7 @@ import { FaCaretDown, FaSearch } from "react-icons/fa";
 import { MdLocalMovies } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
+import ResponsiveAppbar from "./ResponsiveAppbar";
 
 import "./header.css";
 
@@ -34,14 +35,17 @@ const Header = () => {
 				</div>
 				{isMaxWidth && (
 					<div className="responsive-appbar-container">
-						{/* <ResponsiveAppbar /> */}
+						<ResponsiveAppbar />
 					</div>
 				)}
 				{!isMaxWidth && (
 					<div className="links flex flex-row justify-center align-center m-auto">
 						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 							<li className="nav-item">
-								<Link className="nav-link active" aria-current="page" href="/">
+								<Link
+									className="nav-link active text-lg"
+									aria-current="page"
+									href="/">
 									Home
 								</Link>
 							</li>
@@ -49,8 +53,8 @@ const Header = () => {
 								className="nav-item movie"
 								onMouseEnter={onMouseHover}
 								onMouseLeave={onMouseLeave}>
-								<div className="nav-link active" aria-current="page">
-									<div className="h-auto w-auto flex flex-row justify-center align-center">
+								<div className="nav-link active text-lg" aria-current="page">
+									<div className="h-auto w-auto flex flex-row justify-center align-center ">
 										Movies
 										<FaCaretDown className="relative top-[5px]" />
 									</div>
@@ -58,26 +62,26 @@ const Header = () => {
 								<ul
 									className="movies-options"
 									style={{ display: isMenuOpen ? "flex" : "none" }}>
-									<li>
+									<li className="text-sm">
 										<Link href="/movies/what's-on">What's on</Link>
 									</li>
 									<hr className="w-full" />
-									<li>
+									<li className="text-sm">
 										<Link href="/movies/coming-soon">Coming soon</Link>
 									</li>
 								</ul>
 							</li>
-							<li className="nav-item">
+							<li className="nav-item text-lg">
 								<Link className="nav-link" href="/food&drinks">
 									Food & Drinks
 								</Link>
 							</li>
-							<li className="nav-item">
+							<li className="nav-item text-lg">
 								<Link className="nav-link" href="/login">
 									Login
 								</Link>
 							</li>
-							<li className="nav-item">
+							<li className="nav-item text-lg">
 								<Link className="nav-link" href="/register">
 									Register
 								</Link>

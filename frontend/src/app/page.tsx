@@ -3,6 +3,7 @@ import MoviePoster from "@/components/home/MoviePoster";
 import { Movie } from "@/utils/types";
 import Link from "next/link";
 import MoviesColumn from "@/components/home/MoviesColumn";
+import { MdEventSeat } from "react-icons/md";
 
 import "./home.css";
 
@@ -27,8 +28,8 @@ const HomePage = () => {
 								<div></div>
 							))}
 						</div>
-						{/*TODO: add the correct href*/}
-						<Link className="view-all-movies-btn" href="/">
+						
+						<Link className="view-all-movies-btn" href="/movies/what's-on">
 							View all movies
 						</Link>
 						<hr className="dashed" />

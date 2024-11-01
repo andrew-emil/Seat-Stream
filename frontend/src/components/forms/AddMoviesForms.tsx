@@ -5,9 +5,6 @@ import { toast } from "react-toastify";
 import { FieldValues, useForm } from "react-hook-form";
 import ButtonSpinner from "../ButtonSpinner";
 
-import "@/app/admin/add-movies/addMovies.css";
-import "@/app/(user)/login/login.css";
-
 const AddMoviesForms = () => {
 	const {
 		register,
@@ -22,7 +19,7 @@ const AddMoviesForms = () => {
 	const onSubmit = (data: FieldValues) => console.log(data);
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="add-movie-form">
+		<form onSubmit={handleSubmit(onSubmit)} className="form-fields">
 			<div className="form-group">
 				<label>Movie Title</label>
 				<input

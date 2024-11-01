@@ -49,8 +49,88 @@ hr {
 	flex: 1;
 }
 
-.fix-height{
-	height: 90vh;
+.form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--main-color);
+	background-image: url("../../public/background-logo.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	padding: 20px;
+	height: auto;
+	width: 100%;
+}
+
+.form-fields {
+	display: flex;
+	flex-direction: column;
+	width: 500px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+	padding: 40px;
+	border: 1px solid var(--text-color);
+	border-radius: 20px;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+label {
+	display: block;
+    padding: 10px 0;
+	color: var(--text-color);
+	font-weight: bold;
+}
+
+.form-group input:not([type="checkbox"]),
+.form-group textarea {
+	width: 100%;
+	padding: 10px;
+	background-color: var(--input-bg-color);
+	border: 1px solid var(--input-border-color);
+	border-radius: 5px;
+	color: var(--text-color);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+	color: #bbb;
+}
+
+br{
+	margin: 5px;
+}
+
+.submit-button {
+	background-color: var(--button-color);
+	color: var(--text-color);
+	width: 100%;
+	border: none;
+	padding: 15px;
+	margin-top: 20px;
+	border-radius: 5px;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 18px;
+	transition: background-color 0.3s;
+}
+
+.err-msg{
+	text-align: center;
+	padding: 5px;
+	color: var(--error-color);
+	font-size: 18px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+}
+
+.submit-button:hover {
+	background-color: var(--button-hover);
 }
 
 footer {

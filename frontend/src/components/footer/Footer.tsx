@@ -29,7 +29,7 @@ const Footer = () => {
 								</Link>
 							</li>
 							<li className="footer__list-item">
-								<Link href="/whatson" className="footer__link">
+								<Link href="/movies/whats-on" className="footer__link">
 									What's On
 								</Link>
 							</li>

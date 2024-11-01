@@ -1,10 +1,8 @@
-import AddMoviesForms from "@/components/admin components/AddMoviesForms";
-
-import "./addMovies.css"
+import AddMoviesForms from "@/components/forms/AddMoviesForms";
 
 const AddMoviesPage = () => {
 	return (
-		<main className="add-movie-container h-auto w-full p-5 flex justify-center items-center">
+		<main className="form-container">
 			<AddMoviesForms />
 		</main>
 	);
