@@ -4,6 +4,8 @@ import { Movie } from "@/utils/types";
 import Link from "next/link";
 import MoviesColumn from "@/components/home/MoviesColumn";
 import { MdEventSeat } from "react-icons/md";
+import {cookies} from "next/headers"
+
 
 import "./home.css";
 
@@ -11,6 +13,7 @@ const movies: Movie[] = [];
 
 const HomePage = () => {
 	// TODO: call api function
+	// console.log(cookies().get('ACCESS-TOKEN')?.value)
 	return (
 		<main className="home-page-container">
 			<>

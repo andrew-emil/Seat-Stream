@@ -19,5 +19,11 @@
 		"titleBar.inactiveForeground": "#e7e7e799"
 	},
 	"peacock.color": "#215732",
-	"cSpell.words": ["allmovies", "recommendedmovies", "specificmovies", "UUIDV"]
+	"cSpell.words": [
+		"allmovies",
+		"DATABASENAME",
+		"recommendedmovies",
+		"specificmovies",
+		"UUIDV"
+	]
 }
