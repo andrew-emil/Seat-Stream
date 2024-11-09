@@ -47,6 +47,11 @@ app.use(cors({
 	await connectToDatabase();
 })();
 
+// Models initialization (assuming well-structured models)
+require("./models/user.model");
+require("./models/movies.model");
+require("./models/genres.model.js");
+
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/movies", moviesRoutes);
@@ -64,26 +69,4 @@ app.listen(port, () => {
 	console.log(`Listening on port: ${port}`);
 });
 
-// Models initialization (assuming well-structured models)
-require("./models/user.model");
-require("./models/movies.model");
 
-// app.post("/api/addfood",async (req, res) => {
-// 	const foodModel = require("./models/food.model");
-
-// 	const {category_id, name, price, photo} = req.body
-
-// 	try{
-// 		await foodModel.create({
-// 			category_id,
-// 			name,
-// 			price,
-// 			photo
-// 		})
-// 		res.status(200).json({
-// 			status: 'success',
-// 		})
-// 	}catch(err){
-// 		res.status(400).json({message: err.message});
-// 	}
-// })

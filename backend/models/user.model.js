@@ -5,7 +5,7 @@ const sequelize = new Sequelize(process.env.DATABASENAME, process.env.DB_USER, "
 	dialect: "mysql",
 });
 
-const User = sequelize.define(
+const userModel = sequelize.define(
 	"users",
 	{
 		id: {
@@ -43,4 +43,4 @@ const User = sequelize.define(
     }
 );
 
-module.exports = User;
+module.exports = userModel;

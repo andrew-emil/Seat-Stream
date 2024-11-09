@@ -7,3 +7,14 @@ export interface User {
     is_admin: boolean;
 }
 
+export interface Genres {
+    genre_id: number;
+    genre_name: string;
+}
+
+export interface JwtPayload {
+	id: string;
+	username: string;
+	isAdmin: boolean;
+}
+
