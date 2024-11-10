@@ -46,8 +46,6 @@ nav a,
 }
 
 nav .container-fluid .links {
-	display: flex;
-	align-items: center;
 	padding-top: 40px;
 	font-size: 20px;
 	font-weight: bold;
@@ -108,7 +106,7 @@ nav .container-fluid .links {
 }
 
 .links li {
-	margin-left: 20px;
+	margin-left: 14px;
 }
 
 .nav-link:hover,
@@ -174,5 +172,11 @@ nav .container-fluid .links {
 
 	.form-control {
 		width: 150px;
+	}
+}
+
+@media (max-width: 1120px) {
+	.form-control {
+		width: 240px;
 	}
 }

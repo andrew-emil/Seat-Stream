@@ -56,6 +56,7 @@ require("./models/genres.model.js");
 app.use("/api/users", userRoutes);
 app.use("/api/movies", moviesRoutes);
 
+
 // 404 handler
 app.all("*", (_, res: Response) => {
 	res.status(404).json({

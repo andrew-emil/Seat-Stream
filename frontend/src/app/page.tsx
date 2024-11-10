@@ -4,7 +4,8 @@ import { Movie } from "@/utils/types";
 import Link from "next/link";
 import MoviesColumn from "@/components/home/MoviesColumn";
 import { MdEventSeat } from "react-icons/md";
-import {cookies} from "next/headers"
+import { getCookie } from "cookies-next";
+import Cookies from "js-cookie";
 
 
 import "./home.css";
@@ -12,6 +13,8 @@ import "./home.css";
 const movies: Movie[] = [];
 
 const HomePage = () => {
+	const token = Cookies.get('ACCESS-TOKEN', { domain: 'localhost', path: '' })
+	console.log(token)
 	// TODO: call api function
 	// console.log(cookies().get('ACCESS-TOKEN')?.value)
 	return (

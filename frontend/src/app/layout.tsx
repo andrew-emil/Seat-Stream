@@ -7,6 +7,7 @@ import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import Head from "next/head";
+import {authintcateUser} from "@/hooks/useAuth"
 
 export const metadata: Metadata = {
 	title: "Seat Stream",
@@ -15,18 +16,19 @@ export const metadata: Metadata = {
 
 
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const userPayload = await authintcateUser()
 	return (
 		<html lang="en">
 			<Head>
 				<link rel="icon" href="../../public/favicon.ico" />
 			</Head>
 			<body className="page-container overflow-x-hidden">
-				<Header />
+				<Header userPayload={userPayload || null}/>
 				<ToastContainer
 					position="top-center"
 					theme="colored"

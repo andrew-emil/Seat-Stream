@@ -34,10 +34,7 @@ const login = async (req: Request, res: Response): Promise<void> => {
 		is_admin: user.is_admin,
 	});
 
-	res.cookie("ACCESS-TOKEN", token, {
-		httpOnly: true,
-		secure: process.env.NODE_ENV === "production",
-		sameSite: "lax", // or 'none' if using secure: true in cross-site requests
+	res.cookie("ACCESS-TOKEN", token, {// or 'none' if using secure: true in cross-site requests
 		maxAge: 24 * 60 * 60 * 1000, // 1 day
 	});
 

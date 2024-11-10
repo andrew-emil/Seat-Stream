@@ -45,15 +45,6 @@
     width: 100%;
 }
 
-.item a{
-    color: black;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    margin-left: -3px;
-}
-
 .item:hover{
     background-color: var(--link-hover);
     border-radius: 6px;

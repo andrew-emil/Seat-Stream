@@ -1,16 +1,20 @@
-import LoginForm from '@/components/forms/LoginForm';
-import {cookies} from "next/headers"
-
+import LoginForm from "@/components/forms/LoginForm";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 import "./login.css";
 
-const LoginPage = () => {
+const LoginPage = async () => {
+	const cookieStore = await cookies();
+  	const accessToken =  cookieStore.get('ACCESS-TOKEN')?.value;
 
-  return (
-    <main className='form-container'>
-        <LoginForm />
-    </main>
-  )
-}
+	if (accessToken) redirect("/");
 
-export default LoginPage
+	return (
+		<main className="form-container">
+			<LoginForm />
+		</main>
+	);
+};
+
+export default LoginPage;

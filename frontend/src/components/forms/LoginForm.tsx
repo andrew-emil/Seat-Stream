@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { FieldValues, useForm } from "react-hook-form";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import "@/app/(user)/login/login.css";
 
@@ -33,18 +34,20 @@ const LoginForm = () => {
 		setIsLoading(true);
 		clearError();
 		const api = process.env.USERS_API as string;
+		console.log(api)
 		try {
-			axios
-				.post(`${api}/login`, data, {
+			const response = await axios
+				.post(`http://localhost:8000/api/users/login`, data, {
 					headers: { "Content-Type": "application/json" },
 					withCredentials: true,
 				})
-				.then(() => {
-					setIsLoading(false);
-					router.replace("/");
-				});
+
+
+			router.refresh()
+			router.replace("/")
 		} catch (err: any) {
 			setErrorMessage(err.response?.data?.message || "Login failed");
+			console.log(errorMessage)
 		} finally {
 			setIsLoading(false);
 		}
@@ -74,7 +77,7 @@ const LoginForm = () => {
 					className="pass-toggle-visibility"
 					disabled={watch("password") === ""}
 					onClick={togglePasswordVisibility}>
-					{showPassword ? <FiEyeOff size={24} /> : <FiEye size={24} />}
+					{showPassword ? <FiEyeOff size={22} /> : <FiEye size={22} />}
 				</button>
 				{errors.password && (
 					<span className="err-msg">please enter your password</span>

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-export default function useTypingEffect(text: string, speed: number) {
+export const useTypingEffect = (text: string, speed: number) => {
 	const [displayedText, setDisplayedText] = useState<string>("");
 
 	useEffect(() => {
@@ -20,4 +20,4 @@ export default function useTypingEffect(text: string, speed: number) {
 	}, [text, speed]);
 
 	return displayedText;
-}
+};

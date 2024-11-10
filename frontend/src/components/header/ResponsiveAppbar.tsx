@@ -7,14 +7,18 @@ import {
 	FiCoffee,
 	FiLogIn,
 	FiUserPlus,
+	FiUser,
 	FiSearch,
-	// FiShoppingCart,
 } from "react-icons/fi";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import AppbarOption from "./AppbarOption";
+import Link from "next/link";
 
-import "./responsiveAppbar.css"
+import "./responsiveAppbar.css";
 
-const ResponsiveAppbar = () => {
+
+
+const ResponsiveAppbar = ({ userPayload }: UseAuthProps) => {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
@@ -68,12 +72,33 @@ const ResponsiveAppbar = () => {
 					animate={isMenuOpen ? "open" : "closed"}
 					variants={menuVariants}
 					className="list-item">
+					{userPayload && (
+						<motion.li
+							variants={itemVariants}
+							className="flex items-center gap-2 p-2 text-nowrap w-full cursor-pointer border-[6px] border-solid">
+							<Link
+								href="/profile"
+								onClick={handleMenuItemClick}
+								className="flex items-center gap-2 text-blue-700 font-bold transition w-full">
+								<FiUser className="icon" />
+								<span>{userPayload.username}</span>
+							</Link>
+						</motion.li>
+					)}
 					<AppbarOption
 						Icon={FiHome}
 						text="Home"
 						url="/"
 						onClick={handleMenuItemClick}
 					/>
+					{userPayload?.isAdmin === true && (
+						<AppbarOption
+							Icon={MdOutlineAdminPanelSettings}
+							text="Admin Dashboard"
+							url="/admin"
+							onClick={handleMenuItemClick}
+						/>
+					)}
 					<AppbarOption
 						Icon={FiFilm}
 						text="What's on"
@@ -92,18 +117,22 @@ const ResponsiveAppbar = () => {
 						url="/food&drinks"
 						onClick={handleMenuItemClick}
 					/>
-					<AppbarOption
-						Icon={FiLogIn}
-						text="Login"
-						url="/login"
-						onClick={handleMenuItemClick}
-					/>
-					<AppbarOption
-						Icon={FiUserPlus}
-						text="Register"
-						url="/register"
-						onClick={handleMenuItemClick}
-					/>
+					{userPayload === null && (
+						<>
+							<AppbarOption
+								Icon={FiLogIn}
+								text="Login"
+								url="/login"
+								onClick={handleMenuItemClick}
+							/>
+							<AppbarOption
+								Icon={FiUserPlus}
+								text="Register"
+								url="/register"
+								onClick={handleMenuItemClick}
+							/>
+						</>
+					)}
 
 					<motion.li
 						variants={itemVariants}

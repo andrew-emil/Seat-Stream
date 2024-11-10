@@ -22,7 +22,7 @@ const AppbarOption = ({ text, Icon, url, onClick }: AppbarOptionProps) => {
 			<Link
 				href={url}
 				onClick={onClick}
-				className="flex items-center gap-2 text-[#f5f5f5] transition w-full">
+				className="flex items-center gap-2 text-gray-800 transition w-full">
 				<Icon className="icon" />
 				<span>{text}</span>
 			</Link>

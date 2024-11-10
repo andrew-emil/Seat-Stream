@@ -19,7 +19,7 @@ const RegisterForm = () => {
 
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-	const [serverErr, setSeverErr] = useState("");
+	const [errMessage, setErrMessage] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
 
@@ -31,7 +31,36 @@ const RegisterForm = () => {
 		setShowConfirmPassword((prev) => !prev);
 	};
 
-	const onSubmit = (data: FieldValues) => console.log(data);
+	const onSubmit = async (data: FieldValues) => {
+		if (data.password !== data.confirmPassword) {
+			setErrMessage("Passwords must match");
+			return;
+		}
+		setIsLoading(true);
+		const formData = {
+			username: data.username,
+			email: data.email,
+			phone_no: data.codeCountry + data.phoneNumber,
+			password: data.password,
+		};
+		const api = process.env.USERS_API;
+
+		try {
+			const respoinse =  await axios
+				.post(`${api}/register`, formData, {
+					headers: { "Content-Type": "application/json" },
+					withCredentials: true,
+				})
+				
+					router.refresh()
+					router.replace("/");
+				
+		} catch (err: any) {
+			setErrMessage(err.response?.data?.message || "Register failed");
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="signup-form">
@@ -97,10 +126,10 @@ const RegisterForm = () => {
 					/>
 					<button
 						type="button"
-						disabled={watch('password') === ''}
+						disabled={watch("password") === ""}
 						className="toggle-visibility"
 						onClick={togglePasswordVisibility}>
-						{showPassword ? <FiEyeOff size={24} /> : <FiEye size={24} />}
+						{showPassword ? <FiEyeOff size={22} /> : <FiEye size={22} />}
 					</button>
 					{errors.password && (
 						<span className="error-message">password field is required</span>
@@ -118,9 +147,9 @@ const RegisterForm = () => {
 					<button
 						type="button"
 						className="toggle-visibility"
-						disabled={watch('confirmPassword') === ''}
+						disabled={watch("confirmPassword") === ""}
 						onClick={toggleConfirmPassVisibility}>
-						{showConfirmPassword ? <FiEyeOff size={24}/> : <FiEye size={24} />}
+						{showConfirmPassword ? <FiEyeOff size={22} /> : <FiEye size={22} />}
 					</button>
 					{errors.confirmPassword && (
 						<span className="error-message">
@@ -128,7 +157,7 @@ const RegisterForm = () => {
 						</span>
 					)}
 				</label>
-				{serverErr && <span className="err-msg-server">{serverErr}</span>}
+				{errMessage && <span className="err-msg-server">{errMessage}</span>}
 				<br />
 				<button type="submit" className="form-submit" disabled={isLoading}>
 					{isLoading ? <ButtonSpinner /> : "Create Account"}

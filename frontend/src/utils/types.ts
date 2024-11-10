@@ -12,3 +12,12 @@ export interface Movie {
 	director: string;
 }
 
+export interface JwtPayload {
+	id: string;
+	username: string;
+	isAdmin: boolean;
+}
+
+export interface UseAuthProps {
+	userPayload?: JwtPayload | null;
+}
