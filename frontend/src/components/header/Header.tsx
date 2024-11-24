@@ -29,7 +29,6 @@ const Header =  ({ userPayload }: UseAuthProps) => {
 	const onMouseHover = () => setIsMenuOpen(true);
 
 	const onMouseLeave = () => setIsMenuOpen(false);
-	console.log(userPayload);
 	return (
 		<nav>
 			<div className="container-fluid">

@@ -20,10 +20,15 @@
 	},
 	"peacock.color": "#215732",
 	"cSpell.words": [
+		"addmovie",
 		"allmovies",
+		"ARRAYAGG",
 		"DATABASENAME",
+		"modelssetup",
+		"popularmovies",
 		"recommendedmovies",
 		"specificmovies",
-		"UUIDV"
+		"UUIDV",
+		"youtu"
 	]
 }

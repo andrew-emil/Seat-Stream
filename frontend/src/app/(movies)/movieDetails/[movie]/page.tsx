@@ -1,17 +1,19 @@
+import CustomButton from "@/components/CustomButton";
 import { Movie } from "@/utils/types";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import CustomButton from "@/components/CustomButton";
 
 import "./moviesDetail.css";
 
-const MovieDetailPage = () => {
-	const router = useRouter();
-	const movie: Movie = router.query;
-	const index = movie.trailer.indexOf("=");
+interface MoviePageProps {
+	params: { movie: Movie };
+}
+
+const MoviePage = ({ params }: MoviePageProps) => {
+	const index = params.movie.trailer.indexOf("=");
 	const embedURL = `http://www.youtube.com/embed/
-	${movie.trailer.slice(index + 1, movie.trailer.length)}`;
-	const formattedDate = new Date(movie.release_date).toLocaleDateString(
+	${params.movie.trailer.slice(index + 1, params.movie.trailer.length)}`;
+	const formattedDate = new Date(params.movie.release_date).toLocaleDateString(
 		"en-US",
 		{ year: "numeric", month: "long", day: "numeric" }
 	);
@@ -19,12 +21,12 @@ const MovieDetailPage = () => {
 	return (
 		<main className="flex justify-center items-center flex-col p-5 w-full h-auto">
 			<h1 className="text-[#f5f5f5] font-bold flex items-start mb-5 text-xl relative left-[10px]">
-				{movie.title}
+				{params.movie.title}
 			</h1>
 			<div className="flex flex-row justify-between w-full sm:flex-col">
 				<Image
-					src={movie.poster}
-					alt={movie.title}
+					src={params.movie.poster}
+					alt={params.movie.title}
 					height={400}
 					width={300}
 					className="flex items-start mr-5 relative"
@@ -34,7 +36,7 @@ const MovieDetailPage = () => {
 						src={embedURL}
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
 						allowFullScreen
-						title={movie.title}
+						title={params.movie.title}
 						className="w-[600px] h-[400px] sm:w-9/10"></iframe>
 				</div>
 			</div>
@@ -59,21 +61,22 @@ const MovieDetailPage = () => {
 					</span>
 				</div>
 				<div className="category font-bold">
-					Running Time: <span className="data">{movie.running_time} min</span>
+					Running Time:{" "}
+					<span className="data">{params.movie.running_time} min</span>
 				</div>
 				<div className="category font-bold">
 					Release Date: <span className="data">{formattedDate}</span>
 				</div>
 				<div className="category font-bold">
-					Director: <span className="data">{movie.director}</span>
+					Director: <span className="data">{params.movie.director}</span>
 				</div>
 				<div className="category font-bold">
-					Starring: <span className="data">{movie.starring}</span>
+					Starring: <span className="data">{params.movie.starring}</span>
 				</div>
 				<div className="category font-bold">
-					Language: <span className="data">{movie.language}</span>
+					Language: <span className="data">{params.movie.language}</span>
 				</div>
-				<div className="story-line">{movie.story}</div>
+				<div className="story-line">{params.movie.story}</div>
 			</div>
 			<hr className="w-full  mx-5" />
 			<div className="flex flex-row justify-between items-start gap-5 w-full h-[450px] overflow-x-scroll">
@@ -88,10 +91,12 @@ const MovieDetailPage = () => {
 			</div>
 			<hr className="w-full  mx-5" />
 			<div>
-				<h2 className="flex justify-center items-center text-[#f5f5f5] m-1.5" id="showtime">
-					{movie.title} - Showtime
+				<h2
+					className="flex justify-center items-center text-[#f5f5f5] m-1.5"
+					id="showtime">
+					{params.movie.title} - Showtime
 				</h2>
-				{movie.now_showing ? (
+				{params.movie.now_showing ? (
 					<h4 className="flex justify-center items-center text-[#f5f5f5] m-2 font-semibold">
 						Coming soon!
 					</h4>
@@ -104,4 +109,4 @@ const MovieDetailPage = () => {
 	);
 };
 
-export default MovieDetailPage;
+export default MoviePage;

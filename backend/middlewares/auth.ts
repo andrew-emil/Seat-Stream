@@ -8,13 +8,13 @@ interface CustomRequest extends Request {
 
 export const authUser = (req: Request, res: Response, next: NextFunction) => {
 	const token =
-		req.cookies["ACCESS-TOKEN"] || req.headers.authorization?.split(" ")[1];
-        // console.log(token)
-
+		req.cookies['ACCESS-TOKEN'] || req.headers.authorization?.split(" ")[1];
+		// console.log(token);
 	if (!token) {
 		res.status(401).json({
 			message: "Access Denied",
 		});
+		return;
 	}
 
 	try {
@@ -26,11 +26,13 @@ export const authUser = (req: Request, res: Response, next: NextFunction) => {
 		next();
 	} catch (error) {
 		res.status(401).json({ message: "Token is not valid" });
+		return;
 	}
 };
 
 export const authorizeRole = (is_admin: boolean) => {
 	return (req: Request, res: Response, next: NextFunction): void => {
+
 		if ((req as CustomRequest).user.isAdmin !== is_admin) {
 			res.status(403).json({ message: "Access denied" });
             return;

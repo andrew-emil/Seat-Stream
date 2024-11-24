@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { FieldValues, useForm } from "react-hook-form";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 import "@/app/(user)/login/login.css";
 
@@ -34,7 +33,6 @@ const LoginForm = () => {
 		setIsLoading(true);
 		clearError();
 		const api = process.env.USERS_API as string;
-		console.log(api)
 		try {
 			const response = await axios
 				.post(`http://localhost:8000/api/users/login`, data, {
@@ -42,9 +40,8 @@ const LoginForm = () => {
 					withCredentials: true,
 				})
 
-
-			router.refresh()
-			router.replace("/")
+				router.replace("/")
+				router.refresh()
 		} catch (err: any) {
 			setErrorMessage(err.response?.data?.message || "Login failed");
 			console.log(errorMessage)

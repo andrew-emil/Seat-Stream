@@ -1,15 +1,14 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const DataTypes = require('sequelize')
+const sequelize  = require("../config/db");
 
-const sequelize = new Sequelize(process.env.DATABASENAME, process.env.DB_USER, "", {
-	host: process.env.HOST,
-	dialect: "mysql",
-});
 
-const moviesModel = sequelize.define(
+
+const moviesModel = sequelize.sequelize.define(
 	"movies",
 	{
 		movie_id: {
 			type: DataTypes.UUID,
+			defaultValue: DataTypes.UUIDV4,
 			primaryKey: true,
 		},
 		title: {
@@ -32,7 +31,8 @@ const moviesModel = sequelize.define(
 			type: DataTypes.STRING,
 		},
 		poster: {
-			type: DataTypes.TEXT,
+			type: DataTypes.BLOB("long"),
+			allowNull: false,
 		},
 		release_date: {
 			type: DataTypes.DATE,
@@ -55,4 +55,4 @@ const moviesModel = sequelize.define(
 	}
 );
 
-module.exports = moviesModel
+module.exports = moviesModel;

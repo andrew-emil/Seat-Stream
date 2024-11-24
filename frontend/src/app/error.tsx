@@ -8,7 +8,7 @@ interface ErrorPageProps {
 
 const ErrorPage = ({ error, reset }: ErrorPageProps) => {
 	return (
-		<div className="fix-height pt-7 text-center flex justify-center items-center flex-col">
+		<div className="fix-height pt-7 text-center flex justify-center items-center flex-col m-4">
 			<div className="text-3xl text-[#cf0a0a] font-semibold">
 				Something went wrong
 			</div>

@@ -7,7 +7,7 @@ import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import Head from "next/head";
-import {authintcateUser} from "@/hooks/useAuth"
+import {authintcateUser} from "@/utils/authintcateUser"
 
 export const metadata: Metadata = {
 	title: "Seat Stream",

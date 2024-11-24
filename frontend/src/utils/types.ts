@@ -10,6 +10,7 @@ export interface Movie {
 	now_showing: boolean;
 	starring: string;
 	director: string;
+	genres: string[];
 }
 
 export interface JwtPayload {
@@ -20,4 +21,9 @@ export interface JwtPayload {
 
 export interface UseAuthProps {
 	userPayload?: JwtPayload | null;
+}
+
+export interface Genre {
+	genre_id: number;
+	genre_name: string;
 }

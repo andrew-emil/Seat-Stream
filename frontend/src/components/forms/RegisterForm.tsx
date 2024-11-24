@@ -46,14 +46,13 @@ const RegisterForm = () => {
 		const api = process.env.USERS_API;
 
 		try {
-			const respoinse =  await axios
+			const response =  await axios
 				.post(`${api}/register`, formData, {
-					headers: { "Content-Type": "application/json" },
 					withCredentials: true,
 				})
 				
-					router.refresh()
-					router.replace("/");
+				router.replace("/");
+				router.refresh()
 				
 		} catch (err: any) {
 			setErrMessage(err.response?.data?.message || "Register failed");

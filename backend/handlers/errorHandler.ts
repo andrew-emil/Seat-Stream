@@ -16,8 +16,7 @@ const errorHandler: ErrorRequestHandler = (
 		} else if (err instanceof z.ZodError) {
 			res.status(400).json({
 				status: "error",
-				message: "Validation failed",
-				errors: [err.errors.map((err) => err.message)],
+				error: err.message
 			});
 		} else {
 			res.status(400).json({

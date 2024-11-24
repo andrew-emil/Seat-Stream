@@ -1,14 +1,6 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const DataTypes = require('sequelize')
+const { sequelize } = require("../config/db.ts");
 
-const sequelize = new Sequelize(
-	process.env.DATABASENAME,
-	process.env.DB_USER,
-	"",
-	{
-		host: process.env.HOST,
-		dialect: "mysql",
-	}
-);
 
 const genresModel = sequelize.define(
 	"genres",

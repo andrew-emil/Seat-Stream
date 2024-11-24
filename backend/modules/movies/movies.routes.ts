@@ -1,20 +1,28 @@
-import { Router } from 'express'
-import { authUser, authorizeRole } from '../../middlewares/auth'
+import { Router } from "express";
+import { authUser, authorizeRole } from "../../middlewares/auth";
+import multer from "multer";
 
-const getAllMovies = require('./controllers/getAllMovies')
-const getSpecificMovies = require('./controllers/getSpecificMovies')
-const getRecommendedMovies = require('./controllers/moviesRecommendation')
-const getAllGenres = require("./controllers/getMoviesGenres")
 
-const moviesRoutes = Router()
+const getAllMovies = require("./controllers/getAllMovies");
+const getAllGenres = require("./controllers/getMoviesGenres");
+const addMovie = require("./controllers/addMovie");
+const getPopularMovies = require("./controllers/getPopularMovies");
+
+const moviesRoutes = Router();
+const upload = multer({
+	storage: multer.memoryStorage(),
+	limits: { fileSize: 5 * 1024 * 1024 },
+});
 
 //routes
-moviesRoutes.get('/specificmovies', getSpecificMovies)
-moviesRoutes.get('/recommendedmovies', getRecommendedMovies)
+moviesRoutes.get("/popularmovies", getPopularMovies);
+
+//middleware
+moviesRoutes.use(authUser, authorizeRole(true));
 
 //protected routes
-moviesRoutes.get('/allmovies', authUser, authorizeRole(true), getAllMovies)
-moviesRoutes.get("/genres", authUser, authorizeRole(true), getAllGenres);
+moviesRoutes.get("/allmovies", getAllMovies);
+moviesRoutes.get("/genres", getAllGenres);
+moviesRoutes.post("/addmovie", upload.single("poster"), addMovie);
 
-
-export default moviesRoutes
+export default moviesRoutes;

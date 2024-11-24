@@ -2,15 +2,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Movie } from "@/utils/types";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import { useRouter } from "next/navigation";
-import Image  from 'next/image';
+import Image from "next/image";
+import Link from "next/link";
 
-import "@/app/home.css"
+import "@/app/home.css";
 import "swiper/css/pagination";
 
-const Carousel = (movie: Movie[]) => {
-    const router = useRouter();
+interface CarouselProps {
+	movie: Movie[];
+}
 
+const Carousel = ({ movie }: CarouselProps) => {
 	return (
 		<Swiper
 			modules={[Navigation, Pagination, Autoplay]}
@@ -31,20 +33,21 @@ const Carousel = (movie: Movie[]) => {
 			slidesPerView="auto"
 			speed={1000}
 			effect="autoplay"
-			onSlideChange={() => console.log("slide change")}>
+			className="w-full h-full overflow-hidden relative top-6 max-w-[100vw]">
 			{movie.map((slide, index) => (
-				<SwiperSlide
-					key={index}
-					className="slide-inner"
-					onClick={() => {
-						// navigate("/MovieDetail", {
-						// 	state: {
-						// 		movie: movies[index],
-						// 	},
-						// });
-					}}>
-					<Image src={slide.poster} alt={slide.title} height={360} width={300} />
-				</SwiperSlide>
+				<Link href={`movieDetails/${movie[index]}`}>
+					<SwiperSlide
+						key={index}
+						className="w-full h-[90%] flex items-center justify-center cursor-pointer">
+						<Image
+							src={slide.poster}
+							alt={slide.title}
+							height={360}
+							width={300}
+							className="block object-fill"
+						/>
+					</SwiperSlide>
+				</Link>
 			))}
 			<div className="button-prev">
 				<FiArrowLeft className="left-btn" />

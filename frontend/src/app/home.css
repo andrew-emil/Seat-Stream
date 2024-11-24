@@ -1,55 +1,8 @@
-.home-page-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	max-width: 1500px;
-	min-height: 300vh;
-	height: 500vh;
-}
-
-.first-section {
-	position: absolute;
-	top: 85px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	max-width: 100vw;
-	height: 400px;
-}
-
-/* Swiper settings */
-
-.swiper {
-	max-width: 100vw; /* Restricts the width to 90% of the viewport */
-	width: 100%;
-	height: 100%;
-	position: relative;
-	top: 25px;
-	overflow: hidden;
-}
-
 .swiper-wrapper {
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: row;
-}
-
-.swiper-slide {
-	width: 100%; /* Adjust this to control image width */
-	height: 90%; /* Control the height of the image */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
-}
-
-/* Image styling for responsiveness */
-img {
-	display: block;
-	width: 100%;
-	height: 360px;
-	object-fit: fill;
 }
 
 .swiper-pagination-bullet-active {
@@ -102,31 +55,6 @@ img {
 	height: 35px;
 }
 
-/*second section*/
-.second-section {
-	position: absolute;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	height: 900px;
-	padding: 20px;
-}
-
-.second-section {
-	top: 70%;
-}
-
-.section-title span {
-	position: relative;
-	left: 10px;
-	color: var(--text-color);
-	margin: 20px;
-	font-size: 26px;
-	font-weight: bold;
-}
-
 .section-title span::before {
 	content: "";
 	display: flex;
@@ -137,114 +65,24 @@ img {
 	border-radius: 5px;
 }
 
-.grid-container{
-	width: 100%;
-}
-
-.movie-grid {
-	width: auto;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 20px;
-}
-
-.movie-grid .movie-poster {
-	position: relative;
-	overflow: hidden;
-	height: 450px;
-	margin: 0;
-}
 
 
-.movie-poster img {
-	width: 100%;
-	height: 100%;
-	object-fit: fill;
-}
 
-.movie-details {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.9);
-	padding: 20px;
-	transition: opacity 0.3s ease-in-out;
-
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.movie-details h3 {
-	margin-bottom: 10px;
-}
-
-.movie-details p {
-	display: flex;
-	color: var(--text-color);
-	font-size: 14px;
-	width: 100%;
-	height: 100%;
-	line-height: 22px;
-}
-
-.button-container {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 10px;
-}
-
-.more-info-btn,
-.book-now-btn,
 .movie-card-section .movie-details button {
 	color: var(--text-color);
 	outline: none;
 	padding: 10px 20px;
 	margin: 10px;
-	cursor: pointer;
 	border-radius: 5px;
+	cursor: pointer;
 }
 
-.more-info-btn,
 .movie-card-section .movie-details button{
 	border: 2px solid var(--button-hover);
 	background-color: rgba(0, 0, 0, 0.6);
 }
 
-.book-now-btn {
-	background-color: var(--button-color);
-	border: none;
-}
-
-.more-info-btn:hover,
-.book-now-btn:hover,
 .movie-card-section .movie-details button:hover {
-	background-color: var(--button-hover);
-}
-
-.second-section .view-all-movies-btn {
-	display: block;
-	border: none;
-	outline: none;
-	padding: 15px;
-	border-radius: 8px;
-	background-color: var(--button-color);
-	color: var(--text-color);
-	position: relative;
-	left: 50%;
-	width: 200px;
-	text-align: center;
-	transform: translateX(-50%);
-	margin-top: 20px;
-	transition: 0.3s ease-in-out;
-	font-size: 16px;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-.second-section .view-all-movies-btn:hover {
 	background-color: var(--button-hover);
 }
 
