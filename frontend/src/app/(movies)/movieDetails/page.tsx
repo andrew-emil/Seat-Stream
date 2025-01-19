@@ -5,15 +5,13 @@ import { useRouter } from "next/router";
 
 import "./moviesDetail.css";
 
-interface MoviePageProps {
-	params: { movie: Movie };
-}
-
-const MoviePage = ({ params }: MoviePageProps) => {
-	const index = params.movie.trailer.indexOf("=");
+const MoviePage = () => {
+	const router = useRouter();
+	const movie = router.query as unknown as Movie;
+	const index = movie.trailer.indexOf("=");
 	const embedURL = `http://www.youtube.com/embed/
-	${params.movie.trailer.slice(index + 1, params.movie.trailer.length)}`;
-	const formattedDate = new Date(params.movie.release_date).toLocaleDateString(
+	${movie.trailer.slice(index + 1, movie.trailer.length)}`;
+	const formattedDate = new Date(movie.release_date).toLocaleDateString(
 		"en-US",
 		{ year: "numeric", month: "long", day: "numeric" }
 	);
@@ -21,12 +19,12 @@ const MoviePage = ({ params }: MoviePageProps) => {
 	return (
 		<main className="flex justify-center items-center flex-col p-5 w-full h-auto">
 			<h1 className="text-[#f5f5f5] font-bold flex items-start mb-5 text-xl relative left-[10px]">
-				{params.movie.title}
+				{movie.title}
 			</h1>
 			<div className="flex flex-row justify-between w-full sm:flex-col">
 				<Image
-					src={params.movie.poster}
-					alt={params.movie.title}
+					src={movie.poster}
+					alt={movie.title}
 					height={400}
 					width={300}
 					className="flex items-start mr-5 relative"
@@ -36,7 +34,7 @@ const MoviePage = ({ params }: MoviePageProps) => {
 						src={embedURL}
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
 						allowFullScreen
-						title={params.movie.title}
+						title={movie.title}
 						className="w-[600px] h-[400px] sm:w-9/10"></iframe>
 				</div>
 			</div>
@@ -61,22 +59,21 @@ const MoviePage = ({ params }: MoviePageProps) => {
 					</span>
 				</div>
 				<div className="category font-bold">
-					Running Time:{" "}
-					<span className="data">{params.movie.running_time} min</span>
+					Running Time: <span className="data">{movie.running_time} min</span>
 				</div>
 				<div className="category font-bold">
 					Release Date: <span className="data">{formattedDate}</span>
 				</div>
 				<div className="category font-bold">
-					Director: <span className="data">{params.movie.director}</span>
+					Director: <span className="data">{movie.director}</span>
 				</div>
 				<div className="category font-bold">
-					Starring: <span className="data">{params.movie.starring}</span>
+					Starring: <span className="data">{movie.starring}</span>
 				</div>
 				<div className="category font-bold">
-					Language: <span className="data">{params.movie.language}</span>
+					Language: <span className="data">{movie.language}</span>
 				</div>
-				<div className="story-line">{params.movie.story}</div>
+				<div className="story-line">{movie.story}</div>
 			</div>
 			<hr className="w-full  mx-5" />
 			<div className="flex flex-row justify-between items-start gap-5 w-full h-[450px] overflow-x-scroll">
@@ -94,9 +91,9 @@ const MoviePage = ({ params }: MoviePageProps) => {
 				<h2
 					className="flex justify-center items-center text-[#f5f5f5] m-1.5"
 					id="showtime">
-					{params.movie.title} - Showtime
+					{movie.title} - Showtime
 				</h2>
-				{params.movie.now_showing ? (
+				{movie.now_showing ? (
 					<h4 className="flex justify-center items-center text-[#f5f5f5] m-2 font-semibold">
 						Coming soon!
 					</h4>

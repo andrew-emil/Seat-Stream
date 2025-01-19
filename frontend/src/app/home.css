@@ -1,188 +1,279 @@
-.swiper-wrapper {
+.home-page-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 1500px;
+	margin: 0 auto;
+	padding: var(--spacing);
+}
+
+.first-section {
+	margin-top: 85px;
+	width: 100%;
+	height: 400px;
+	display: flex;
+	justify-content: center;
+}
+
+.swiper {
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
+}
+
+.swiper-slide {
 	display: flex;
-	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }
 
 .swiper-pagination-bullet-active {
 	width: 15px;
-	border-radius: 10px;
-	transition: width 0.3s ease;
+	height: 15px;
+	transition: all 0.3s ease;
 }
 
-/* Pagination bullets */
-.swiper {
-	--swiper-pagination-color: rgba(56, 245, 255, 1);
-	--swiper-pagination-bullet-inactive-color: white;
-}
-
-/* Navigation buttons styling */
 .button-next,
 .button-prev {
 	position: absolute;
 	top: 50%;
+	transform: translateY(-50%);
 	width: 50px;
 	height: 50px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 10px;
-	border-radius: 50%;
 	background-color: rgba(56, 245, 255, 0.2);
-	transform: translateY(-50%);
+	border-radius: 50%;
 	cursor: pointer;
-	z-index: 10;
 }
 
-:is(.button-next, .button-prev):hover {
-	background-color: rgba(56, 245, 255, 0.3);
-}
-
-/* Next button positioning */
 .button-next {
 	right: 10px;
 }
 
-/* Previous button positioning */
 .button-prev {
 	left: 10px;
 }
 
-.right-btn,
-.left-btn {
-	width: 35px;
-	height: 35px;
+.second-section {
+	margin-top: 50px;
+	width: 100%;
+	padding: var(--spacing);
+}
+
+.section-title span {
+	display: block;
+	font-size: var(--font-size-lg);
+	font-weight: bold;
+	margin-bottom: var(--spacing);
+	color: var(--text-color);
 }
 
 .section-title span::before {
 	content: "";
-	display: flex;
+	display: block;
 	width: 70px;
-	height: 10px;
+	height: 5px;
 	background-color: var(--button-color);
 	margin-bottom: 5px;
-	border-radius: 5px;
 }
 
+.grid-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing);
+	padding: var(--spacing);
+	max-width: 1300px;
+}
 
+.movie-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 15px;
+}
 
+.movie-item {
+	position: relative;
+	overflow: hidden;
+	border-radius: 10px;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-.movie-card-section .movie-details button {
+.movie-item img {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+}
+
+.bigger-poster {
+	grid-column: span 2;
+	grid-row: span 2;
+}
+
+.movie-item:hover {
+	transform: scale(1.05);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.movie-details {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 15px;
+	background: rgba(0, 0, 0, 0.8);
 	color: var(--text-color);
-	outline: none;
-	padding: 10px 20px;
-	margin: 10px;
-	border-radius: 5px;
-	cursor: pointer;
+	transition: opacity 0.3s ease;
 }
 
-.movie-card-section .movie-details button{
-	border: 2px solid var(--button-hover);
-	background-color: rgba(0, 0, 0, 0.6);
+.movie-details h3 {
+	margin: 0;
+	font-size: 1.2rem;
 }
 
-.movie-card-section .movie-details button:hover {
-	background-color: var(--button-hover);
+.movie-details p {
+	margin-top: 10px;
+	font-size: 0.9rem;
+	line-height: 1.5;
 }
 
-.upcoming-movies,
-.coming-soon-movies{
-	width: 100%;
-}
-
-.upcoming-movies .section-title{
-	margin-bottom: 10px;
-}
-
-.movie-card-section {
-	background-color: transparent;
-	width: 100%;
-	height: 400px;
+.button-container {
+	margin-top: 10px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: flex-start;
-	padding: 10px;
-	position: relative;
-	float: right;
+	gap: 8px;
 }
 
-.movie-card-section .movie-image {
+.more-info-btn,
+.book-now-btn {
+	flex: 1;
+	padding: 8px 12px;
+	color: var(--text-color);
+	border-radius: 5px;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.more-info-btn {
+	background-color: transparent;
+	border: 2px solid var(--button-hover);
+}
+
+.book-now-btn {
+	background-color: var(--button-color);
+	border: none;
+}
+
+.more-info-btn:hover,
+.book-now-btn:hover {
+	background-color: var(--button-hover);
+}
+
+.view-all-movies-btn {
+	margin-top: 20px;
+	padding: 10px 20px;
+	background-color: var(--button-color);
+	color: var(--text-color);
+	text-decoration: none;
+	font-weight: bold;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.view-all-movies-btn:hover {
+	background-color: var(--button-hover);
+}
+
+.dashed {
+	border: 1px dashed #ccc;
+	width: 95%;
+}
+
+.upcoming-movies {
+	margin-top: 10px;
+	width: 100%;
+}
+
+.movie-card-section {
 	display: flex;
-	width: auto;
-	height: auto;
+	gap: var(--spacing);
+	padding: var(--spacing);
+	flex-wrap: wrap;
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.movie-image img {
+	border-radius: 5px;
 	object-fit: cover;
-	border-radius: 5px 5px 0 0;
+	height: 100%;
 }
 
-.movie-card-section .movie-details {
-	width: calc(100% - 220px);
+.movie-desc {
 	display: flex;
-	align-items: flex-start;
-	background-color: transparent;
-	position: relative;
-	margin: -14px;
-	right: 20px;
+	flex-direction: column;
+	gap: var(--spacing);
 }
 
-.movie-card-section .movie-details .info-btn{
-	background-color: transparent;
+.movie-desc h3,
+.movie-desc p {
+	color: var(--text-color);
+	font-size: 1rem;
+	line-height: 1.5;
 }
 
-.coming-soon-movies hr.dashed,
-.second-section hr.dashed{
-	background-color: transparent;
-	width: 92%;
-	display: block;
-	margin: 20px;
-	border: 2px dashed var(--text-color);
-	border-spacing: 30px;
+.movie-desc h3 {
+	font-weight: bold;
 }
 
-@media screen and (max-width: 1150px) {
+/* Responsive Design */
+@media (max-width: 1024px) {
+	.movie-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.bigger-poster {
+		grid-column: span 2;
+		grid-row: span 2;
+	}
+}
+
+@media (max-width: 768px) {
+	.home-page-container {
+		padding: var(--spacing);
+	}
+
 	.movie-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
-	.home-page-container{
-		height: 550vh;
+
+	.bigger-poster {
+		grid-column: span 1;
+		grid-row: span 1;
+	}
+
+	.second-section {
+		padding: var(--spacing);
+	}
+
+	.upcoming-movies {
+		margin-top: var(--spacing);
 	}
 }
 
-@media screen and (max-width: 768px) {
-	.home-page-container{
-		height: 600vh;
-	}
-
+@media (max-width: 480px) {
 	.movie-grid {
-		position: relative;
-		padding: 0 20%;
 		grid-template-columns: 1fr;
-		height: 100%;
+		gap: 10px;
 	}
 
-	.movie-grid .movie-poster {
-		display: block;
-	}
-
-	.upcoming-movies{
-		position: relative;
-		top: 100px;
-	}
-}
-
-@media screen and (max-width: 490px){
-	.home-page-container{
-		height: 700vh;
-	}
-
-	.movie-card-section{
-		display: flex;
+	.movie-card-section {
 		flex-direction: column;
-		height: auto;
 	}
 
-	.movie-card-section .movie-details{
-		width: 100%;
+	.movie-details {
+		padding: var(--spacing);
 	}
 }

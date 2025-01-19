@@ -18,6 +18,9 @@
 	--available-seat: #2bace1;
 	--your-seat: #7f094b;
 	--link-hover: #2196f3;
+	--spacing: 16px;
+	--font-size-lg: 1.5rem;
+	--font-size-md: 1rem;
 }
 
 *,
@@ -82,7 +85,7 @@ hr {
 
 label {
 	display: block;
-    padding: 10px 0;
+	padding: 10px 0;
 	color: var(--text-color);
 	font-weight: bold;
 }
@@ -102,7 +105,7 @@ label {
 	color: #bbb;
 }
 
-br{
+br {
 	margin: 5px;
 }
 
@@ -120,7 +123,7 @@ br{
 	transition: background-color 0.3s;
 }
 
-.err-msg{
+.err-msg {
 	text-align: center;
 	padding: 5px;
 	color: var(--error-color);

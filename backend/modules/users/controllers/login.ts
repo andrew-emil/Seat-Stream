@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const jwtHandler = require("../../../handlers/jwtHandler");
 
 const login = async (req: Request, res: Response): Promise<void> => {
-	const userModel = require("../../../models/user.model.js")
+	const userModel = require("../../../models/user.model.js");
 	const { usernameOrEmail, password } = req.body;
 
 	try {
@@ -24,9 +24,7 @@ const login = async (req: Request, res: Response): Promise<void> => {
 		});
 
 		if (!user) {
-			res
-				.status(401)
-				.json({ error: "Wrong username/email or password" });
+			res.status(401).json({ error: "Wrong username/email or password" });
 		}
 
 		const comparedPassword: boolean = await bcrypt.compare(
@@ -35,9 +33,7 @@ const login = async (req: Request, res: Response): Promise<void> => {
 		);
 
 		if (!comparedPassword) {
-			res
-				.status(401)
-				.json({ error: "Wrong username/email or password" });
+			res.status(401).json({ error: "Wrong username/email or password" });
 		}
 
 		const token = jwtHandler({

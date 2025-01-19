@@ -1,18 +1,27 @@
+"use client";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Movie } from "@/utils/types";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 
 import "@/app/home.css";
+import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 interface CarouselProps {
-	movie: Movie[];
+	movies: Movie[];
 }
 
-const Carousel = ({ movie }: CarouselProps) => {
+const Carousel = ({ movies }: CarouselProps) => {
+	const router = useRouter();
+
+	const handleSlideClick = (movie: Movie) => {
+		router.push("/movieDetails" )
+	};
 	return (
 		<Swiper
 			modules={[Navigation, Pagination, Autoplay]}
@@ -24,30 +33,28 @@ const Carousel = ({ movie }: CarouselProps) => {
 			pagination={{
 				dynamicBullets: true,
 			}}
-			centeredSlides={true}
+			centeredSlides
 			autoplay={{
 				delay: 2500,
 				disableOnInteraction: false,
 			}}
-			rewind={true}
-			slidesPerView="auto"
+			rewind
 			speed={1000}
-			effect="autoplay"
-			className="w-full h-full overflow-hidden relative top-6 max-w-[100vw]">
-			{movie.map((slide, index) => (
-				<Link href={`movieDetails/${movie[index]}`}>
-					<SwiperSlide
-						key={index}
-						className="w-full h-[90%] flex items-center justify-center cursor-pointer">
-						<Image
-							src={slide.poster}
-							alt={slide.title}
-							height={360}
-							width={300}
-							className="block object-fill"
-						/>
-					</SwiperSlide>
-				</Link>
+			slidesPerView={3}
+			effect="autoplay">
+			{movies.map((slide, index) => (
+				<SwiperSlide
+					className="slide-inner"
+					key={index}
+					onClick={() => handleSlideClick(slide)}>
+					<Image
+						src={slide.poster}
+						alt={slide.title}
+						layout="fill"
+						objectFit="cover"
+						className="cursor-pointer"
+					/>
+				</SwiperSlide>
 			))}
 			<div className="button-prev">
 				<FiArrowLeft className="left-btn" />
