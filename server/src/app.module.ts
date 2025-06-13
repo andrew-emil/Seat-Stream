@@ -1,0 +1,47 @@
+import { Module } from "@nestjs/common";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { APP_GUARD } from "@nestjs/core";
+import { MongooseModule } from "@nestjs/mongoose";
+import * as joi from "joi";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { AuthModule } from "./auth/auth.module";
+import { AccessTokenGuard } from "./auth/guards/access-token.guard";
+import { AuthGuard } from "./auth/guards/auth.guard";
+import databaseConfig, { databaseSchema } from "./config/database.config";
+import jwtConfig, { jwtSchema } from "./config/jwt.config";
+import { UsersModule } from "./users/users.module";
+
+@Module({
+	imports: [
+		ConfigModule.forRoot({
+			isGlobal: true,
+			validationSchema: joi.object({
+				...databaseSchema,
+				...jwtSchema,
+			}),
+			load: [databaseConfig, jwtConfig],
+			envFilePath: ".env",
+		}),
+		MongooseModule.forRootAsync({
+			imports: [ConfigModule],
+			useFactory: (configService: ConfigService) => ({
+				uri: configService.get<string>("database.host"),
+				dbName: configService.get<string>("database.databaseName"),
+			}),
+			inject: [ConfigService],
+		}),
+		UsersModule,
+		AuthModule,
+	],
+	controllers: [AppController],
+	providers: [
+		AppService,
+		{
+			provide: APP_GUARD,
+			useClass: AuthGuard,
+		},
+		AccessTokenGuard,
+	],
+})
+export class AppModule {}
