@@ -1,0 +1,83 @@
+User:
+  username: string, required, unique
+  password: string, required
+  email: string, required, unique
+  role: enum[admin, user], required
+
+Genre:
+  name: string, required, unique
+
+Rating:
+  stars: number, required, min= 1, max= 10
+  comment: string, optional
+  user: User, required
+
+Movie:
+  title: string, required
+  description: string, required
+  trailer_url: string, required
+  poster: Buffer, required
+  running_time: number
+  language: string, required
+  subtitle: string
+  genres: Genre[], required
+  release_date: date, required
+  starring: string, required
+  director: string, required
+
+Seat:
+  seat_number: string, required
+  row: string, required
+  type: enum[standard, vip], optional
+  is_available: boolean, required
+
+Theater:
+  name: string, required
+  location: string, required
+  capacity: number, required
+  seats: Seat[], required
+  seat_map: string[][]
+
+Showtime:
+  movie_id: Movie, required
+  theater_id: Theater, required
+  time: time, required
+  date: date, required
+  price: number, required
+
+MenuCategory:
+  name: string, required, unique
+  description: string, optional
+
+MenuItem:
+  name: string, required, unique
+  description: string, optional
+  category: MenuCategory, required
+  type: enum[food, drink], required
+  price: number, required
+  image: Buffer, optional
+  available: boolean, required
+
+Cart:
+  user: User, required
+  tickets: Ticket[], optional
+  order: Order, optional
+  created_at: date, required
+  updated_at: date, required
+
+Ticket:
+  showtime: Showtime, required
+  seat: Seat, required
+  price: number, required
+  status: enum[reserved, booked, cancelled], required
+
+Order:
+  items: OrderItem[], required
+  total_price: number, required
+  status: enum[pending, preparing, delivered, cancelled], required
+  created_at: date, required
+
+OrderItem:
+  menu_item: MenuItem, required
+  quantity: number, required
+  price: number, required

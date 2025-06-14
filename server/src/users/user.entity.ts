@@ -2,7 +2,6 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { UserSurname } from "./enums/userSurname.enum";
 import { UserRole } from "./enums/userRole.enum";
 import { Document } from "mongoose";
-import { Exclude } from "class-transformer";
 
 @Schema()
 export class User extends Document {
@@ -42,8 +41,8 @@ export class User extends Document {
 	@Prop({
 		required: false,
 		type: String,
+		
 	})
-	@Exclude()
 	password?: string;
 
 	@Prop({
@@ -64,7 +63,6 @@ export class User extends Document {
 		required: false,
 		type: String,
 	})
-	@Exclude()
 	googleId?: string;
 }
 

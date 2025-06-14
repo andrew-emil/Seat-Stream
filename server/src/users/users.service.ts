@@ -10,8 +10,6 @@ import { CreateUserDto } from "./dtos/createUser.dto";
 import { UpdateUserDto } from "./dtos/updateUser.dto";
 import { UserRole } from "./enums/userRole.enum";
 import { User } from "./user.entity";
-import { plainToInstance } from "class-transformer";
-import { UserResponseDto } from "./dtos/userResponse.dto";
 
 @Injectable()
 export class UsersService {
@@ -50,7 +48,7 @@ export class UsersService {
 
 	public async findUser(id: string) {
 		const user = await this.userModel
-			.findById(id)
+			.findOne({ _id: id })
 			.select([
 				"firstName",
 				"lastName",
@@ -60,18 +58,21 @@ export class UsersService {
 				"birthDate",
 			]);
 		if (!user) throw new NotFoundException("User not found");
-		return plainToInstance(UserResponseDto, user.toObject());
+
+		return user;
 	}
 
 	public async updateUser(id: string, updateUserDto: UpdateUserDto) {
-		const user = await this.userModel
-			.findById(id)
-			
+		const user = await this.userModel.findByIdAndUpdate(id, updateUserDto, {
+			projection: {
+				password: 0,
+				googleId: 0,
+			},
+		});
+
 		if (!user) throw new NotFoundException("User not found");
 
-		Object.assign(user, updateUserDto);
-		const updatedUser = await user.save();
-		return plainToInstance(UserResponseDto, updatedUser.toObject());
+		return user.save();
 	}
 
 	public async findUserByGoogleId(googleId: string) {

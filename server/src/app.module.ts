@@ -11,6 +11,11 @@ import { AuthGuard } from "./auth/guards/auth.guard";
 import databaseConfig, { databaseSchema } from "./config/database.config";
 import jwtConfig, { jwtSchema } from "./config/jwt.config";
 import { UsersModule } from "./users/users.module";
+import { SeederModule } from './seeder/seeder.module';
+import { GenresModule } from './genres/genres.module';
+import { PaginationModule } from './common/pagination/pagination.module';
+import { RatingsModule } from './ratings/ratings.module';
+import { MoviesModule } from './movies/movies.module';
 
 @Module({
 	imports: [
@@ -33,6 +38,11 @@ import { UsersModule } from "./users/users.module";
 		}),
 		UsersModule,
 		AuthModule,
+		SeederModule,
+		GenresModule,
+		PaginationModule,
+		RatingsModule,
+		MoviesModule,
 	],
 	controllers: [AppController],
 	providers: [

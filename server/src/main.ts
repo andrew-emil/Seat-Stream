@@ -1,7 +1,7 @@
-import { NestFactory, Reflector } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import { ClassSerializerInterceptor, ValidationPipe } from "@nestjs/common";
+import { ValidationPipe } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { AppModule } from "./app.module";
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
@@ -33,8 +33,6 @@ async function bootstrap() {
 		allowedHeaders: ["Content-Type", "Authorization"],
 		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
 	});
-
-	app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
 	await app.listen(parseInt(process.env.PORT ?? "4000"));
 }

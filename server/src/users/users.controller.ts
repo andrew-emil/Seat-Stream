@@ -4,21 +4,21 @@ import {
 	ForbiddenException,
 	Get,
 	HttpStatus,
-	Patch,
+	Patch
 } from "@nestjs/common";
-import { ActiveUser } from "src/auth/decorators/active-user.decorator";
-import { Auth } from "src/auth/decorators/auth.decorator";
-import { AuthType } from "src/auth/enums/authType.enum";
-import { JwtPayload } from "src/auth/interfaces/jwt-payload";
-import { UpdateUserDto } from "./dtos/updateUser.dto";
-import { UsersService } from "./users.service";
-import { UserRole } from "./enums/userRole.enum";
 import {
 	ApiBearerAuth,
 	ApiOperation,
 	ApiResponse,
 	ApiTags,
 } from "@nestjs/swagger";
+import { ActiveUser } from "src/auth/decorators/active-user.decorator";
+import { Auth } from "src/auth/decorators/auth.decorator";
+import { AuthType } from "src/auth/enums/authType.enum";
+import { JwtPayload } from "src/auth/interfaces/jwt-payload";
+import { UpdateUserDto } from "./dtos/updateUser.dto";
+import { UserRole } from "./enums/userRole.enum";
+import { UsersService } from "./users.service";
 
 @ApiTags("Users")
 @ApiBearerAuth()
