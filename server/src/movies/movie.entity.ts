@@ -73,6 +73,12 @@ export class Movie extends Document {
 
 	@Prop({
 		required: true,
+		type: Date,
+	})
+	createdAt: Date;
+
+	@Prop({
+		required: true,
 		type: [Types.ObjectId],
 		ref: Genre.name,
 	})

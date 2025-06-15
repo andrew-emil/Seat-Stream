@@ -16,6 +16,8 @@ import { GenresModule } from './genres/genres.module';
 import { PaginationModule } from './common/pagination/pagination.module';
 import { RatingsModule } from './ratings/ratings.module';
 import { MoviesModule } from './movies/movies.module';
+import { SeatsModule } from './seats/seats.module';
+import { TheatersModule } from './theaters/theaters.module';
 
 @Module({
 	imports: [
@@ -43,6 +45,8 @@ import { MoviesModule } from './movies/movies.module';
 		PaginationModule,
 		RatingsModule,
 		MoviesModule,
+		SeatsModule,
+		TheatersModule,
 	],
 	controllers: [AppController],
 	providers: [
