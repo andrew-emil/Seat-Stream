@@ -30,6 +30,8 @@ import {
 	ApiQuery,
 } from "@nestjs/swagger";
 
+//TODO: make auth public for some routes
+
 @ApiTags("Movies")
 @ApiBearerAuth()
 @Controller("movies")
@@ -70,6 +72,7 @@ export class MoviesController {
 		@Query() query: MovieQueryDto,
 		@ActiveUser() user: JwtPayload
 	) {
+		console.log("first")
 		authorizeUser(user, UserRole.ADMIN);
 		return this.moviesService.getMovies(query);
 	}

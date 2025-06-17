@@ -53,11 +53,10 @@ export class CreateTheaterDto {
 			["B1", "B2", "B3"],
 		],
 		type: [String],
-		isArray: true
+		isArray: true,
 	})
 	@IsArray()
+	@ArrayMinSize(1)
 	@IsArray({ each: true })
-	@IsString({ each: true })
-	@IsNotEmpty()
 	seat_map: string[][];
 }

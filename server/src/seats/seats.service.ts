@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Seat } from "./seat.entity";
-import { Model } from "mongoose";
+import { Model, DeleteResult } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
 import { CreateSeatDto } from "./dtos/createSeat.dto";
 
@@ -37,5 +37,11 @@ export class SeatsService {
 			},
 			{ $set: { is_available: false } }
 		);
+	}
+
+	public async deleteSeats(ids: string[]): Promise<DeleteResult> {
+		return await this.seatModel.deleteMany({
+			_id: { $in: ids },
+		});
 	}
 }

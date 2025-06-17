@@ -31,7 +31,7 @@ export class Theater extends Document {
 
 	@Prop({
 		required: true,
-		type: String,
+		type: [[String]],
 	})
 	seat_map: string[][];
 }

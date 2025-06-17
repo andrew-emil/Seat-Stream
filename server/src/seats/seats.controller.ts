@@ -1,43 +1,18 @@
-import { Controller, Post, Body, Patch, HttpCode, HttpStatus } from "@nestjs/common";
-import { SeatsService } from "./seats.service";
-import { CreateSeatDto } from "./dtos/createSeat.dto";
-import { ActiveUser } from "src/auth/decorators/active-user.decorator";
-import { JwtPayload } from "src/auth/interfaces/jwt-payload";
-import { authorizeUser } from "src/common/utils/authorizeUser";
-import { UserRole } from "src/users/enums/userRole.enum";
+import { Body, Controller, HttpCode, HttpStatus, Patch } from "@nestjs/common";
 import {
-	ApiTags,
+	ApiBearerAuth,
+	ApiBody,
 	ApiOperation,
 	ApiResponse,
-	ApiBody,
-	ApiBearerAuth,
+	ApiTags,
 } from "@nestjs/swagger";
+import { SeatsService } from "./seats.service";
 
 @ApiTags("Seats")
 @ApiBearerAuth()
 @Controller("seats")
 export class SeatsController {
 	constructor(private readonly seatsService: SeatsService) {}
-
-	@Post()
-	@ApiOperation({ summary: "Create multiple seats" })
-	@ApiBody({ type: [CreateSeatDto] })
-	@ApiResponse({
-		status: 201,
-		description: "The seats have been successfully created.",
-		type: [CreateSeatDto],
-	})
-	@ApiResponse({
-		status: 403,
-		description: "Forbidden - Only admins can create seats.",
-	})
-	public createSeats(
-		@Body() seats: CreateSeatDto[],
-		@ActiveUser() user: JwtPayload
-	) {
-		authorizeUser(user, UserRole.ADMIN);
-		return this.seatsService.createSeats(seats);
-	}
 
 	@Patch("/book")
 	@HttpCode(HttpStatus.OK)
