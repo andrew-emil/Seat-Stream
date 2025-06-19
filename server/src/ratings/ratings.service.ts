@@ -26,7 +26,6 @@ export class RatingsService {
 		userId: string,
 		movieId: string
 	) {
-		//TODO: Check if the movie exists
 		//TODO: Check if the user booked the movie
 		const existingRating = await this.ratingModel.findOne({
 			user: userId,

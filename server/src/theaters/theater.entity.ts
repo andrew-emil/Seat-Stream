@@ -6,15 +6,9 @@ import { Seat } from "src/seats/seat.entity";
 export class Theater extends Document {
 	@Prop({
 		required: true,
-		type: String,
+		type: Number,
 	})
-	name: string;
-
-	@Prop({
-		required: true,
-		type: String,
-	})
-	location: string;
+	number: number;
 
 	@Prop({
 		required: true,

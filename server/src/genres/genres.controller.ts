@@ -2,29 +2,28 @@ import {
 	Body,
 	Controller,
 	Delete,
-	ForbiddenException,
 	Get,
 	HttpCode,
 	HttpStatus,
 	Param,
 	Post,
 	Put,
-	Query,
+	Query
 } from "@nestjs/common";
-import { GenresService } from "./genres.service";
-import { GenreQueryDto } from "./dtos/genreQuery.dto";
+import {
+	ApiBearerAuth,
+	ApiBody,
+	ApiOperation,
+	ApiParam,
+	ApiQuery,
+	ApiResponse,
+	ApiTags,
+} from "@nestjs/swagger";
 import { ActiveUser } from "src/auth/decorators/active-user.decorator";
 import { JwtPayload } from "src/auth/interfaces/jwt-payload";
-import { UserRole } from "src/users/enums/userRole.enum";
-import {
-	ApiTags,
-	ApiOperation,
-	ApiResponse,
-	ApiBearerAuth,
-	ApiParam,
-	ApiBody,
-	ApiQuery,
-} from "@nestjs/swagger";
+import { authorizeUser } from "src/common/utils/authorizeUser";
+import { GenreQueryDto } from "./dtos/genreQuery.dto";
+import { GenresService } from "./genres.service";
 
 @ApiTags("Genres")
 @ApiBearerAuth()
@@ -45,11 +44,7 @@ export class GenresController {
 		@Body("name") name: string,
 		@ActiveUser() user: JwtPayload
 	) {
-		if (user.role !== UserRole.ADMIN) {
-			throw new ForbiddenException(
-				"You are not authorized to access this resource"
-			);
-		}
+		authorizeUser(user);
 		return this.genresService.createGenre(name);
 	}
 
@@ -66,11 +61,7 @@ export class GenresController {
 		@Query() query: GenreQueryDto,
 		@ActiveUser() user: JwtPayload
 	) {
-		if (user.role !== UserRole.ADMIN) {
-			throw new ForbiddenException(
-				"You are not authorized to access this resource"
-			);
-		}
+		authorizeUser(user);
 		return this.genresService.getGenres(query);
 	}
 
@@ -83,11 +74,7 @@ export class GenresController {
 		description: "Forbidden - Admin access required",
 	})
 	public getGenresWithoutPagination(@ActiveUser() user: JwtPayload) {
-		if (user.role !== UserRole.ADMIN) {
-			throw new ForbiddenException(
-				"You are not authorized to access this resource"
-			);
-		}
+		authorizeUser(user);
 		return this.genresService.getGenresWithoutPagination();
 	}
 
@@ -107,11 +94,7 @@ export class GenresController {
 		@Body() name: string,
 		@ActiveUser() user: JwtPayload
 	) {
-		if (user.role !== UserRole.ADMIN) {
-			throw new ForbiddenException(
-				"You are not authorized to access this resource"
-			);
-		}
+		authorizeUser(user);
 		return this.genresService.updateGenre(id, name);
 	}
 
@@ -126,11 +109,7 @@ export class GenresController {
 	})
 	@ApiResponse({ status: 404, description: "Genre not found" })
 	public deleteGenre(@Param("id") id: string, @ActiveUser() user: JwtPayload) {
-		if (user.role !== UserRole.ADMIN) {
-			throw new ForbiddenException(
-				"You are not authorized to access this resource"
-			);
-		}
+		authorizeUser(user);
 		return this.genresService.deleteGenre(id);
 	}
 }

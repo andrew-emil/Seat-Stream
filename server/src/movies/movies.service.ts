@@ -139,4 +139,8 @@ export class MoviesService {
 
 		return movies;
 	}
+
+	public async countMovies(): Promise<number> {
+		return await this.movieModel.countDocuments();
+	}
 }

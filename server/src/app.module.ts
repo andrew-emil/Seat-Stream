@@ -18,6 +18,7 @@ import { RatingsModule } from './ratings/ratings.module';
 import { MoviesModule } from './movies/movies.module';
 import { SeatsModule } from './seats/seats.module';
 import { TheatersModule } from './theaters/theaters.module';
+import { ShowtimeModule } from './showtime/showtime.module';
 
 @Module({
 	imports: [
@@ -47,6 +48,7 @@ import { TheatersModule } from './theaters/theaters.module';
 		MoviesModule,
 		SeatsModule,
 		TheatersModule,
+		ShowtimeModule,
 	],
 	controllers: [AppController],
 	providers: [

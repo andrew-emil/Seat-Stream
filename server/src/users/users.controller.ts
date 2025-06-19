@@ -1,11 +1,4 @@
-import {
-	Body,
-	Controller,
-	ForbiddenException,
-	Get,
-	HttpStatus,
-	Patch
-} from "@nestjs/common";
+import { Body, Controller, Get, HttpStatus, Patch } from "@nestjs/common";
 import {
 	ApiBearerAuth,
 	ApiOperation,
@@ -13,17 +6,14 @@ import {
 	ApiTags,
 } from "@nestjs/swagger";
 import { ActiveUser } from "src/auth/decorators/active-user.decorator";
-import { Auth } from "src/auth/decorators/auth.decorator";
-import { AuthType } from "src/auth/enums/authType.enum";
 import { JwtPayload } from "src/auth/interfaces/jwt-payload";
+import { authorizeUser } from "src/common/utils/authorizeUser";
 import { UpdateUserDto } from "./dtos/updateUser.dto";
-import { UserRole } from "./enums/userRole.enum";
 import { UsersService } from "./users.service";
 
 @ApiTags("Users")
 @ApiBearerAuth()
 @Controller("users")
-@Auth(AuthType.BEARER)
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
 
@@ -77,11 +67,7 @@ export class UsersController {
 		description: "User is not authenticated",
 	})
 	public getUsersCount(@ActiveUser() user: JwtPayload) {
-		if (user.role !== UserRole.ADMIN) {
-			throw new ForbiddenException(
-				"You are not authorized to access this resource"
-			);
-		}
+		authorizeUser(user);
 		return this.usersService.countUsers();
 	}
 }

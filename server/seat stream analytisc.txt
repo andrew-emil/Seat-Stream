@@ -1,7 +1,7 @@
-no. of users
-no. of movies
+no. of users (done)
+no. of movies (done)
 no. of snacks
-no. of theaters
+no. of theaters (done)
 Total Tickets Sold (daily/weekly/monthly) => Chart: Bar chart with time on the x‑axis
 Seat Utilization Rate (sold seats ÷ total seats) by movie or screen => Chart: Stacked bar or percentage bar chart
 total Revenue (tickets vs. concessions vs. other up sells) => Chart: Donut or pie chart for breakdown; line chart for trend

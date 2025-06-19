@@ -32,8 +32,7 @@ Seat:
   is_available: boolean, required
 
 Theater:
-  name: string, required
-  location: string, required
+  number: int, required
   capacity: number, required
   seats: Seat[], required
   seat_map: string[][]

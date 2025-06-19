@@ -13,7 +13,6 @@ import {
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ActiveUser } from "src/auth/decorators/active-user.decorator";
 import { JwtPayload } from "src/auth/interfaces/jwt-payload";
-import { UserRole } from "src/users/enums/userRole.enum";
 import { CreateMovieDto } from "./dtos/createMovie.dto";
 import { MoviesService } from "./movies.service";
 import { MovieQueryDto } from "./dtos/movieQuery.dto";
@@ -29,8 +28,8 @@ import {
 	ApiConsumes,
 	ApiQuery,
 } from "@nestjs/swagger";
-
-//TODO: make auth public for some routes
+import { Auth } from "src/auth/decorators/auth.decorator";
+import { AuthType } from "src/auth/enums/authType.enum";
 
 @ApiTags("Movies")
 @ApiBearerAuth()
@@ -54,7 +53,7 @@ export class MoviesController {
 		@UploadedFile() poster: Express.Multer.File,
 		@ActiveUser() user: JwtPayload
 	) {
-		authorizeUser(user, UserRole.ADMIN);
+		authorizeUser(user);
 		movie.poster = poster.buffer;
 
 		return this.moviesService.createMovie(movie);
@@ -72,14 +71,14 @@ export class MoviesController {
 		@Query() query: MovieQueryDto,
 		@ActiveUser() user: JwtPayload
 	) {
-		console.log("first")
-		authorizeUser(user, UserRole.ADMIN);
+		authorizeUser(user);
 		return this.moviesService.getMovies(query);
 	}
 
 	@Get("/popular")
 	@ApiOperation({ summary: "Get popular movies" })
 	@ApiResponse({ status: 200, description: "Returns list of popular movies" })
+	@Auth(AuthType.NONE)
 	public getPopularMovies() {
 		return this.moviesService.getPopularMovies();
 	}
@@ -95,6 +94,7 @@ export class MoviesController {
 		status: 200,
 		description: "Returns list of movies filtered by now showing status",
 	})
+	@Auth(AuthType.NONE)
 	public getMovieByNowShowing(@Query("nowShowing") nowShowing: boolean) {
 		return this.moviesService.getMovieByNowShowing(nowShowing);
 	}
@@ -105,7 +105,7 @@ export class MoviesController {
 		status: 200,
 		description: "Returns list of recommended movies",
 	})
-	@ApiResponse({ status: 401, description: "Unauthorized" })
+	@Auth(AuthType.NONE)
 	public getRecommendedMovies(@ActiveUser() user: JwtPayload) {
 		return this.moviesService.getRecommendedMovies(user.sub);
 	}
@@ -115,6 +115,7 @@ export class MoviesController {
 	@ApiParam({ name: "id", description: "Movie ID" })
 	@ApiResponse({ status: 200, description: "Returns the movie details" })
 	@ApiResponse({ status: 404, description: "Movie not found" })
+	@Auth(AuthType.NONE)
 	public getMovie(@Param("id") id: string) {
 		return this.moviesService.getMovie(id);
 	}
@@ -137,7 +138,7 @@ export class MoviesController {
 		@ActiveUser() user: JwtPayload,
 		@UploadedFile() poster: Express.Multer.File
 	) {
-		authorizeUser(user, UserRole.ADMIN);
+		authorizeUser(user);
 		movie.poster = poster.buffer;
 		return this.moviesService.updateMovie(id, movie);
 	}
@@ -152,7 +153,7 @@ export class MoviesController {
 	})
 	@ApiResponse({ status: 404, description: "Movie not found" })
 	public deleteMovie(@Param("id") id: string, @ActiveUser() user: JwtPayload) {
-		authorizeUser(user, UserRole.ADMIN);
+		authorizeUser(user);
 		return this.moviesService.deleteMovie(id);
 	}
 
@@ -163,7 +164,23 @@ export class MoviesController {
 		status: 200,
 		description: "Returns list of movies matching the search query",
 	})
+	@Auth(AuthType.NONE)
 	public searchMovies(@Query("query") query: string) {
 		return this.moviesService.searchMovies(query);
+	}
+
+	@Get("/count-movies")
+	@ApiOperation({ summary: "Get total number of movies" })
+	@ApiResponse({
+		status: 200,
+		description: "Returns the total number of movies",
+	})
+	@ApiResponse({
+		status: 403,
+		description: "Forbidden - Admin access required",
+	})
+	public countMovies(@ActiveUser() user: JwtPayload) {
+		authorizeUser(user);
+		return this.moviesService.countMovies();
 	}
 }

@@ -94,4 +94,8 @@ export class TheatersService {
 
 		return theater;
 	}
+
+	public async countTheaters(): Promise<number>{
+		return await this.theaterModel.countDocuments()
+	}
 }

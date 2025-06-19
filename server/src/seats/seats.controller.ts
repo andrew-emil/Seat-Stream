@@ -31,6 +31,14 @@ export class SeatsController {
 		description: "The seats have been successfully booked.",
 		type: [String],
 	})
+	@ApiResponse({
+		status: 400,
+		description: "Invalid seat IDs or seats are already booked",
+	})
+	@ApiResponse({
+		status: 404,
+		description: "One or more seats not found",
+	})
 	public bookSeats(@Body() seatIds: string[]) {
 		return this.seatsService.bookSeats(seatIds);
 	}

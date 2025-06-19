@@ -1,50 +1,33 @@
+import { ApiProperty } from "@nestjs/swagger";
+import { Type } from "class-transformer";
 import {
-	IsString,
-	IsNumber,
+	ArrayMinSize,
 	IsArray,
 	IsNotEmpty,
-	ArrayMinSize,
-	ValidateNested,
+	IsNumber,
+	IsPositive,
+	ValidateNested
 } from "class-validator";
-import { Type } from "class-transformer";
-import { ApiProperty } from "@nestjs/swagger";
 import { CreateSeatDto } from "src/seats/dtos/createSeat.dto";
 
 export class CreateTheaterDto {
 	@ApiProperty({
-		description: "The name of the theater",
-		example: "Cineplex Downtown",
+		description: "The theater number",
+		example: 1,
 	})
-	@IsString()
+	@IsNumber()
+	@IsPositive()
 	@IsNotEmpty()
-	name: string;
-
-	@ApiProperty({
-		description: "The location of the theater",
-		example: "123 Main Street, City",
-	})
-	@IsString()
-	@IsNotEmpty()
-	location: string;
+	number: number;
 
 	@ApiProperty({
 		description: "The total capacity of the theater",
 		example: 200,
 	})
 	@IsNumber()
+	@IsPositive()
 	@IsNotEmpty()
 	capacity: number;
-
-	@ApiProperty({
-		description: "Array of seat IDs",
-		example: ["seat1", "seat2", "seat3"],
-		type: [String],
-	})
-	@IsArray()
-	@ArrayMinSize(1)
-	@ValidateNested({ each: true })
-	@Type(() => CreateSeatDto)
-	seats: CreateSeatDto[];
 
 	@ApiProperty({
 		description: "2D array representing the seat layout of the theater",
@@ -59,4 +42,15 @@ export class CreateTheaterDto {
 	@ArrayMinSize(1)
 	@IsArray({ each: true })
 	seat_map: string[][];
+
+	@ApiProperty({
+		description: "Array of seat IDs",
+		example: ["seat1", "seat2", "seat3"],
+		type: [String],
+	})
+	@IsArray()
+	@ArrayMinSize(1)
+	@ValidateNested({ each: true })
+	@Type(() => CreateSeatDto)
+	seats: CreateSeatDto[];
 }
