@@ -57,18 +57,9 @@ MenuItem:
   image: Buffer, optional
   available: boolean, required
 
-Cart:
-  user: User, required
-  tickets: Ticket[], optional
-  order: Order, optional
-  created_at: date, required
-  updated_at: date, required
-
 Ticket:
   showtime: Showtime, required
   seat: Seat, required
-  price: number, required
-  status: enum[reserved, booked, cancelled], required
 
 Order:
   items: OrderItem[], required
@@ -80,3 +71,11 @@ OrderItem:
   menu_item: MenuItem, required
   quantity: number, required
   price: number, required
+
+
+Cart:
+  user: User, required
+  tickets: Ticket[], optional
+  order: Order, optional
+  created_at: date, required
+  updated_at: date, required

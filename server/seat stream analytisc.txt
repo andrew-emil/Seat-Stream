@@ -1,6 +1,6 @@
 no. of users (done)
 no. of movies (done)
-no. of snacks
+no. of snacks (done)
 no. of theaters (done)
 Total Tickets Sold (daily/weekly/monthly) => Chart: Bar chart with time on the x‑axis
 Seat Utilization Rate (sold seats ÷ total seats) by movie or screen => Chart: Stacked bar or percentage bar chart
@@ -8,7 +8,3 @@ total Revenue (tickets vs. concessions vs. other up sells) => Chart: Donut or pi
 Total Snack Sales by category (popcorn, drinks, candy, combos) => Chart: Horizontal bar chart
 Top‑Selling Items (ranked) => _Table or bar chart with top 10 items
 Genre Performance (revenue or tickets by genre) => Chart: Bar chart by genre
-
-
-add swagger
-NOTE: you need to read the functions to implement swagger correctly

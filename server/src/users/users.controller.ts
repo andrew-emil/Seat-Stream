@@ -27,8 +27,8 @@ export class UsersController {
 		status: HttpStatus.UNAUTHORIZED,
 		description: "User is not authenticated",
 	})
-	public getUser(@ActiveUser() user: JwtPayload) {
-		return this.usersService.findUser(user.sub);
+	public async getUser(@ActiveUser() user: JwtPayload) {
+		return await this.usersService.findUser(user.sub);
 	}
 
 	@Patch()
@@ -45,11 +45,11 @@ export class UsersController {
 		status: HttpStatus.UNAUTHORIZED,
 		description: "User is not authenticated",
 	})
-	public updateUser(
+	public async updateUser(
 		@Body() updateUserDto: UpdateUserDto,
 		@ActiveUser() user: JwtPayload
 	) {
-		return this.usersService.updateUser(user.sub, updateUserDto);
+		return await this.usersService.updateUser(user.sub, updateUserDto);
 	}
 
 	@Get("count")
@@ -66,8 +66,8 @@ export class UsersController {
 		status: HttpStatus.UNAUTHORIZED,
 		description: "User is not authenticated",
 	})
-	public getUsersCount(@ActiveUser() user: JwtPayload) {
+	public async getUsersCount(@ActiveUser() user: JwtPayload) {
 		authorizeUser(user);
-		return this.usersService.countUsers();
+		return await this.usersService.countUsers();
 	}
 }

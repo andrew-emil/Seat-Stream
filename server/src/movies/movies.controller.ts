@@ -48,15 +48,14 @@ export class MoviesController {
 		description: "Forbidden - Admin access required",
 	})
 	@ApiResponse({ status: 409, description: "Movie already exists" })
-	public createMovie(
+	public async createMovie(
 		@Body() movie: CreateMovieDto,
 		@UploadedFile() poster: Express.Multer.File,
 		@ActiveUser() user: JwtPayload
 	) {
 		authorizeUser(user);
 		movie.poster = poster.buffer;
-
-		return this.moviesService.createMovie(movie);
+		return await this.moviesService.createMovie(movie);
 	}
 
 	@Get()
@@ -67,20 +66,20 @@ export class MoviesController {
 		status: 403,
 		description: "Forbidden - Admin access required",
 	})
-	public getMovies(
+	public async getMovies(
 		@Query() query: MovieQueryDto,
 		@ActiveUser() user: JwtPayload
 	) {
 		authorizeUser(user);
-		return this.moviesService.getMovies(query);
+		return await this.moviesService.getMovies(query);
 	}
 
 	@Get("/popular")
 	@ApiOperation({ summary: "Get popular movies" })
 	@ApiResponse({ status: 200, description: "Returns list of popular movies" })
 	@Auth(AuthType.NONE)
-	public getPopularMovies() {
-		return this.moviesService.getPopularMovies();
+	public async getPopularMovies() {
+		return await this.moviesService.getPopularMovies();
 	}
 
 	@Get("/now-showing")
@@ -95,8 +94,8 @@ export class MoviesController {
 		description: "Returns list of movies filtered by now showing status",
 	})
 	@Auth(AuthType.NONE)
-	public getMovieByNowShowing(@Query("nowShowing") nowShowing: boolean) {
-		return this.moviesService.getMovieByNowShowing(nowShowing);
+	public async getMovieByNowShowing(@Query("nowShowing") nowShowing: boolean) {
+		return await this.moviesService.getMovieByNowShowing(nowShowing);
 	}
 
 	@Get("/recommended")
@@ -106,8 +105,8 @@ export class MoviesController {
 		description: "Returns list of recommended movies",
 	})
 	@Auth(AuthType.NONE)
-	public getRecommendedMovies(@ActiveUser() user: JwtPayload) {
-		return this.moviesService.getRecommendedMovies(user.sub);
+	public async getRecommendedMovies(@ActiveUser() user: JwtPayload) {
+		return await this.moviesService.getRecommendedMovies(user.sub);
 	}
 
 	@Get("/:id")
@@ -116,8 +115,8 @@ export class MoviesController {
 	@ApiResponse({ status: 200, description: "Returns the movie details" })
 	@ApiResponse({ status: 404, description: "Movie not found" })
 	@Auth(AuthType.NONE)
-	public getMovie(@Param("id") id: string) {
-		return this.moviesService.getMovie(id);
+	public async getMovie(@Param("id") id: string) {
+		return await this.moviesService.getMovie(id);
 	}
 
 	@Patch("/:id")
@@ -132,7 +131,7 @@ export class MoviesController {
 		description: "Forbidden - Admin access required",
 	})
 	@ApiResponse({ status: 404, description: "Movie not found" })
-	public updateMovie(
+	public async updateMovie(
 		@Param("id") id: string,
 		@Body() movie: UpdateMovieDto,
 		@ActiveUser() user: JwtPayload,
@@ -140,7 +139,7 @@ export class MoviesController {
 	) {
 		authorizeUser(user);
 		movie.poster = poster.buffer;
-		return this.moviesService.updateMovie(id, movie);
+		return await this.moviesService.updateMovie(id, movie);
 	}
 
 	@Delete("/:id")
@@ -152,9 +151,12 @@ export class MoviesController {
 		description: "Forbidden - Admin access required",
 	})
 	@ApiResponse({ status: 404, description: "Movie not found" })
-	public deleteMovie(@Param("id") id: string, @ActiveUser() user: JwtPayload) {
+	public async deleteMovie(
+		@Param("id") id: string,
+		@ActiveUser() user: JwtPayload
+	) {
 		authorizeUser(user);
-		return this.moviesService.deleteMovie(id);
+		return await this.moviesService.deleteMovie(id);
 	}
 
 	@Get("/search")
@@ -165,8 +167,8 @@ export class MoviesController {
 		description: "Returns list of movies matching the search query",
 	})
 	@Auth(AuthType.NONE)
-	public searchMovies(@Query("query") query: string) {
-		return this.moviesService.searchMovies(query);
+	public async searchMovies(@Query("query") query: string) {
+		return await this.moviesService.searchMovies(query);
 	}
 
 	@Get("/count-movies")
@@ -179,8 +181,8 @@ export class MoviesController {
 		status: 403,
 		description: "Forbidden - Admin access required",
 	})
-	public countMovies(@ActiveUser() user: JwtPayload) {
+	public async countMovies(@ActiveUser() user: JwtPayload) {
 		authorizeUser(user);
-		return this.moviesService.countMovies();
+		return await this.moviesService.countMovies();
 	}
 }

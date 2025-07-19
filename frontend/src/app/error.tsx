@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 
 interface ErrorPageProps {
@@ -6,10 +7,10 @@ interface ErrorPageProps {
 	reset: () => void;
 }
 
-const ErrorPage = ({ error, reset }: ErrorPageProps) => {
+export default function Error({ error, reset }: ErrorPageProps) {
 	return (
 		<div className="fix-height pt-7 text-center flex justify-center items-center flex-col m-4">
-			<div className="text-3xl text-[#cf0a0a] font-semibold">
+			<div className="text-3xl text-error-500 font-semibold">
 				Something went wrong
 			</div>
 			<h2 className="text-gray-700 my-3 text-xl">
@@ -17,14 +18,14 @@ const ErrorPage = ({ error, reset }: ErrorPageProps) => {
 			</h2>
 			<button
 				onClick={() => reset()}
-				className="bg-[#7f094b] hover:bg-[#a7517c] text-white font-bold py-2 px-4 rounded-full">
+				className="bg-primary-700 hover:bg-primary-300 text-white font-bold py-2 px-4 rounded-full">
 				Try again
 			</button>
-			<Link className="text-xl underline text-[#2196f3] block mt-6" href="/">
+			<Link
+				className="text-xl underline text-secondary-400 block mt-6"
+				href="/">
 				Go to home page
 			</Link>
 		</div>
 	);
-};
-
-export default ErrorPage;
+}

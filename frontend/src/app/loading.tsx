@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-const Loading = () => {
+export default function loading() {
 	return (
 		<section className="flex flex-col items-center justify-center h-screen">
 			<div className="loader">
-				<div className="relative w-14 h-16 bg-[#3d314a] -z-10 loader__filmstrip">
+				<div className="relative w-14 h-16 bg-[#3d314a] z-10 loader__filmstrip">
 					<style jsx>
 						{`
 							.loader__filmstrip::after,
@@ -24,7 +24,7 @@ const Loading = () => {
 							}
 							@keyframes roll {
 								0% {
-									top: 0px;
+									top: 0;
 								}
 								100% {
 									top: 6px;
@@ -33,12 +33,10 @@ const Loading = () => {
 						`}
 					</style>
 				</div>
-				<p className="relative right-2 my-1 mx-auto text-[#3d314a] uppercase tracking-wide font-bold">
+				<p className="relative right-2 my-1 mx-auto text-primary-800 uppercase tracking-wide font-bold">
 					loading...
 				</p>
 			</div>
 		</section>
 	);
 };
-
-export default Loading;

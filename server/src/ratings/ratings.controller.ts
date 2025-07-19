@@ -1,11 +1,4 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Param,
-	Patch,
-	Post
-} from "@nestjs/common";
+import { Body, Controller, Delete, Param, Patch, Post } from "@nestjs/common";
 import {
 	ApiBearerAuth,
 	ApiOperation,
@@ -33,12 +26,16 @@ export class RatingsController {
 		status: 409,
 		description: "User has already rated this movie",
 	})
-	public createRating(
+	public async createRating(
 		@Param("movieId") movieId: string,
 		@Body() createRatingDto: CreateRatingDto,
 		@ActiveUser() user: JwtPayload
 	) {
-		return this.ratingsService.createRating(createRatingDto, user.sub, movieId);
+		return await this.ratingsService.createRating(
+			createRatingDto,
+			user.sub,
+			movieId
+		);
 	}
 
 	@Patch("/:movieId")
@@ -46,12 +43,16 @@ export class RatingsController {
 	@ApiParam({ name: "movieId", description: "Movie ID" })
 	@ApiResponse({ status: 200, description: "Rating successfully updated" })
 	@ApiResponse({ status: 404, description: "Rating not found" })
-	public updateRating(
+	public async updateRating(
 		@Param("movieId") movieId: string,
 		@Body() updateRatingDto: UpdateRatingDto,
 		@ActiveUser() user: JwtPayload
 	) {
-		return this.ratingsService.updateRating(updateRatingDto, user.sub, movieId);
+		return await this.ratingsService.updateRating(
+			updateRatingDto,
+			user.sub,
+			movieId
+		);
 	}
 
 	@Delete("/:movieId")
@@ -59,10 +60,10 @@ export class RatingsController {
 	@ApiParam({ name: "movieId", description: "Movie ID" })
 	@ApiResponse({ status: 200, description: "Rating successfully deleted" })
 	@ApiResponse({ status: 404, description: "Rating not found" })
-	public deleteRating(
+	public async deleteRating(
 		@Param("movieId") movieId: string,
 		@ActiveUser() user: JwtPayload
 	) {
-		return this.ratingsService.deleteRating(user.sub, movieId);
+		return await this.ratingsService.deleteRating(user.sub, movieId);
 	}
 }

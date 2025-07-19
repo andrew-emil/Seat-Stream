@@ -8,7 +8,7 @@ import {
 	Param,
 	Post,
 	Put,
-	Query
+	Query,
 } from "@nestjs/common";
 import {
 	ApiBearerAuth,
@@ -40,12 +40,12 @@ export class GenresController {
 		description: "Forbidden - Admin access required",
 	})
 	@ApiResponse({ status: 409, description: "Genre already exists" })
-	public createGenre(
+	public async createGenre(
 		@Body("name") name: string,
 		@ActiveUser() user: JwtPayload
 	) {
 		authorizeUser(user);
-		return this.genresService.createGenre(name);
+		return await this.genresService.createGenre(name);
 	}
 
 	@Get()
@@ -57,12 +57,12 @@ export class GenresController {
 		status: 403,
 		description: "Forbidden - Admin access required",
 	})
-	public getGenres(
+	public async getGenres(
 		@Query() query: GenreQueryDto,
 		@ActiveUser() user: JwtPayload
 	) {
 		authorizeUser(user);
-		return this.genresService.getGenres(query);
+		return await this.genresService.getGenres(query);
 	}
 
 	@Get("all")
@@ -73,9 +73,9 @@ export class GenresController {
 		status: 403,
 		description: "Forbidden - Admin access required",
 	})
-	public getGenresWithoutPagination(@ActiveUser() user: JwtPayload) {
+	public async getGenresWithoutPagination(@ActiveUser() user: JwtPayload) {
 		authorizeUser(user);
-		return this.genresService.getGenresWithoutPagination();
+		return await this.genresService.getGenresWithoutPagination();
 	}
 
 	@Put("/:id")
@@ -89,13 +89,13 @@ export class GenresController {
 		description: "Forbidden - Admin access required",
 	})
 	@ApiResponse({ status: 404, description: "Genre not found" })
-	public updateGenre(
+	public async updateGenre(
 		@Param("id") id: string,
 		@Body() name: string,
 		@ActiveUser() user: JwtPayload
 	) {
 		authorizeUser(user);
-		return this.genresService.updateGenre(id, name);
+		return await this.genresService.updateGenre(id, name);
 	}
 
 	@Delete("/:id")
@@ -108,8 +108,11 @@ export class GenresController {
 		description: "Forbidden - Admin access required",
 	})
 	@ApiResponse({ status: 404, description: "Genre not found" })
-	public deleteGenre(@Param("id") id: string, @ActiveUser() user: JwtPayload) {
+	public async deleteGenre(
+		@Param("id") id: string,
+		@ActiveUser() user: JwtPayload
+	) {
 		authorizeUser(user);
-		return this.genresService.deleteGenre(id);
+		return await this.genresService.deleteGenre(id);
 	}
 }

@@ -1,68 +1,45 @@
-import Carousel from "@/components/home/Carousel";
-import MoviePoster from "@/components/home/MoviePoster";
-import { Movie } from "@/utils/types";
+import Container from "@mui/material/Container";
+import { Suspense } from "react";
+import Carousal from "@/app/_components/home/Carousal";
+import { CircularProgress } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import MoviesColumn from "@/components/home/MoviesColumn";
-import { MOVIES_URL } from "@/config/envConfig";
-import { MdEventSeat } from "react-icons/md";
+import MovieGrid from "@/app/_components/home/MovieGrid";
+import { CustomButton } from "@/app/_components/StyledComponents";
 
-import "./home.css";
+import "./styles/globals.css";
 
-const HomePage = async () => {
-	const response = await fetch(`${MOVIES_URL}/popularmovies`);
-	if (!response.ok)
-		throw new Error("Connection error: " + response.status.toString());
-	const {
-		nowShowing,
-		comingSoon,
-	}: { nowShowing: Movie[]; comingSoon: Movie[] } = await response.json();
-
-	return (
-		<main className="home-page-container">
-			<section className="first-section">
-				<Carousel movies={nowShowing} />
-			</section>
-			<br />
-			<div className="second-section my-8">
-				<div className="section-title">
-					<span>What's on</span>
-				</div>
-				<br />
-				<div className="grid-container">
-					<div className="movie-grid">
-						{nowShowing.map((movie, index) => (
-							<MoviePoster
-								key={movie.movie_id}
-								movie={nowShowing[index]}
-								isPosterBigger={index == 0 || index == 7}
-							/>
-						))}
-					</div>
-					<Link className="view-all-movies-btn" href="/movies/what's-on">
-						View all movies
-					</Link>
-					<hr />
-				</div>
-			</div>
-			<div className="upcoming-movies my-8">
-				<div className="section-title">
-					<span>
-						Coming soon
-					</span>
-				</div>
-				<div className="coming-soon-movies">
-					{comingSoon.map((movie, index) => (
-						<>
-							<MoviesColumn movie={movie} key={movie.movie_id} />
-							{index < 4 && index < comingSoon.length - 1 && (
-								<hr className="dashed" />
-							)}
-						</>
-					))}
-				</div>
-			</div>
-		</main>
-	);
-};
-
-export default HomePage;
+export default function Home() {
+  return (
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "auto",
+        padding: 0,
+      }}
+    >
+      <section className="w-full h-full flex-1 justify-center">
+        <Suspense fallback={<CircularProgress color="secondary" />}>
+          <Carousal />
+        </Suspense>
+      </section>
+      <br />
+      <section className="flex-1 w-full my-8">
+        <div>
+          <Typography className="section-title" variant="h5">
+            What&aposs on
+          </Typography>
+        </div>
+        <br />
+        <Suspense fallback={<CircularProgress color={"secondary"} />}>
+          <MovieGrid />
+        </Suspense>
+        <Link href="/movies/what's-on">
+          <CustomButton>View all movies</CustomButton>
+        </Link>
+      </section>
+    </Container>
+  );
+}
